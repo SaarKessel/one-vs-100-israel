@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>1 נגד 100 - הגרסה הישראלית</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;background:#02030a;overflow:hidden;font-family:"Heebo","Assistant","Segoe UI",Arial,sans-serif;color:#fff;user-select:none}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#st{position:relative;width:1280px;height:720px;flex:none;transform-origin:center center;overflow:hidden;background:linear-gradient(#050a2a 0%,#0b1760 38%,#1b1b7a 52%,#3a1470 100%);direction:ltr}
+.abs{position:absolute}
+/* lights */
+.beam{position:absolute;top:-30px;width:260px;height:560px;transform-origin:50% 0;background:linear-gradient(to bottom,rgba(170,215,255,.75),rgba(110,170,255,.25) 55%,transparent 95%);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);mix-blend-mode:screen;filter:blur(2px)}
+.b1{left:170px;animation:sw1 6s ease-in-out infinite}.b2{left:420px;animation:sw2 7s ease-in-out infinite}.b3{left:700px;animation:sw1 8s ease-in-out infinite reverse}.b4{left:930px;animation:sw2 5.5s ease-in-out infinite}
+.b5{left:-40px;background:linear-gradient(to bottom,rgba(255,120,220,.55),transparent 90%);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);animation:sw2 9s ease-in-out infinite}
+.b6{left:1060px;background:linear-gradient(to bottom,rgba(255,120,220,.55),transparent 90%);animation:sw1 9s ease-in-out infinite}
+@keyframes sw1{0%,100%{transform:rotate(-16deg)}50%{transform:rotate(14deg)}}
+@keyframes sw2{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-17deg)}}
+.truss{position:absolute;top:95px;width:240px;height:34px;background:repeating-linear-gradient(115deg,#9fb3dd 0 3px,transparent 3px 14px),linear-gradient(#6b7fb3,#6b7fb3) top/100% 3px no-repeat,linear-gradient(#6b7fb3,#6b7fb3) bottom/100% 3px no-repeat;opacity:.7}
+.tl{left:-20px;transform:rotate(24deg)}.tr{right:-20px;transform:rotate(-24deg)}
+.crowd{position:absolute;bottom:260px;width:260px;height:230px;background:radial-gradient(circle at 50% 50%,rgba(20,10,50,.9) 0 5px,transparent 6px) 0 0/16px 18px,linear-gradient(to top,rgba(255,60,200,.55),rgba(60,80,255,.15));-webkit-mask:linear-gradient(to top,#000,transparent);mask:linear-gradient(to top,#000,transparent)}
+.cl{left:0}.cr{right:0}
+.bands{position:absolute;left:0;right:0;top:330px;height:110px;background:repeating-linear-gradient(to bottom,rgba(120,190,255,.55) 0 7px,rgba(10,20,90,.1) 7px 16px);-webkit-mask:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);mask:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);animation:bandp 3s ease-in-out infinite}
+@keyframes bandp{50%{opacity:.6}}
+.floor{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(to bottom,rgba(60,10,90,0),rgba(190,40,140,.5)),repeating-linear-gradient(90deg,rgba(255,110,210,.28) 0 2px,transparent 2px 60px),repeating-linear-gradient(0deg,rgba(255,110,210,.28) 0 2px,transparent 2px 40px),#25104f;-webkit-mask:linear-gradient(to bottom,transparent,#000 25%);mask:linear-gradient(to bottom,transparent,#000 25%)}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 50%,rgba(0,0,10,.65));pointer-events:none}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:fl .5s ease-out}
+@keyframes fl{0%{opacity:.85}100%{opacity:0}}
+.redtint{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,0,0,.0),rgba(255,0,0,.55));opacity:0;pointer-events:none;transition:opacity .4s}
+/* HUD */
+.hud{direction:rtl;position:absolute;top:36px;font-weight:900;font-size:26px;letter-spacing:1px;text-shadow:0 0 12px #6cf,0 0 3px #fff;color:#e8f2ff}
+#score{left:235px}
+#title{left:50%;transform:translateX(-50%);font-size:40px;top:26px;color:#fff;text-shadow:0 0 18px #4af,0 0 5px #fff}
+#title b{color:#ffcf3a;text-shadow:0 0 16px #f90}
+#left{left:850px;direction:rtl}
+/* wall */
+#wall{position:absolute;left:188px;top:86px;width:684px;display:flex;flex-direction:column;align-items:center;gap:3px;filter:drop-shadow(0 0 14px rgba(110,190,255,.7))}
+.row{display:flex;gap:3px;justify-content:center}
+.b{position:relative;width:33px;height:34px;background:radial-gradient(ellipse at 50% 30%,#9db9ff,#3558d8 70%,#1c2f9a);border:1px solid #bfe0ff;overflow:hidden;transition:filter .3s}
+.b svg{position:absolute;inset:0;width:100%;height:100%}
+.b .l{position:absolute;right:0;top:0;width:13px;height:13px;border-radius:0 0 0 6px;font-size:10px;line-height:13px;text-align:center;font-weight:900;color:#fff;display:none}
+.b.show .l{display:block}
+.b.lock{animation:lockp .6s ease-out}
+@keyframes lockp{0%{filter:brightness(2.5)}100%{filter:none}}
+.b.hot{animation:hotp .5s infinite alternate;outline:2px solid #ffe14a;z-index:2}
+@keyframes hotp{to{filter:brightness(2) saturate(1.5)}}
+.b.out{animation:outa .9s forwards}
+@keyframes outa{0%{background:#ff2b2b;filter:brightness(2.2)}35%{background:#ff2b2b;filter:brightness(1.6)}100%{background:#0a0f33;filter:brightness(.5)}}
+.b.gone svg{opacity:.0;transition:opacity .5s}
+.b.gone{background:#0a0f33;border-color:#27346e}
+.b.gone .l{display:none}
+.bubble{position:absolute;z-index:20;min-width:170px;max-width:260px;background:#fff;color:#111;border-radius:12px;padding:7px 10px;font-size:15px;font-weight:700;direction:rtl;text-align:center;box-shadow:0 0 18px #8cf;animation:pop .25s ease-out}
+.bubble small{display:block;color:#456;font-weight:600;font-size:12px}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+/* one */
+#one{position:absolute;left:36px;top:200px;width:130px;height:190px}
+#ring{position:absolute;left:30px;top:350px;width:330px;height:60px;border-radius:50%;border:3px solid #cde4ff;border-top-color:#6e8dd4;background:radial-gradient(ellipse,rgba(80,130,255,.35),transparent 70%);opacity:.8}
+#msg{position:absolute;left:188px;width:684px;top:322px;text-align:center;font-size:23px;font-weight:700;color:#e9f1ff;text-shadow:0 0 8px #48f;direction:rtl;min-height:30px}
+/* question */
+#qbar{position:absolute;left:150px;top:368px;width:790px;height:92px;background:linear-gradient(#52104f,#2a0a3a);border:3px solid #55c3ff;box-shadow:0 0 22px #3ac,inset 0 0 22px rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 26px;font-size:30px;font-weight:800;line-height:1.2;direction:rtl;opacity:0}
+#qbar.in{animation:qin .6s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes qin{from{transform:scale(.5) rotateX(70deg);opacity:0}to{transform:none;opacity:1}}
+#ans{position:absolute;left:150px;top:472px;width:790px;height:104px;display:flex;flex-direction:row-reverse;justify-content:space-between}
+.a{position:relative;width:250px;height:104px;background:linear-gradient(#2a0a1c,#1b0714);border:3px solid #c7cbe0;box-shadow:inset 0 0 14px #000;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px 12px 8px;font-size:25px;font-weight:800;line-height:1.1;cursor:pointer;direction:rtl;opacity:0;transform:translateY(30px);transition:background .25s,box-shadow .25s,opacity .2s}
+.a.in{opacity:1;transform:none;transition:transform .4s,opacity .4s}
+.a .k{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:50px;height:30px;background:#7a3b9c;border:2px solid #d9b6ff;font-size:22px;line-height:26px;font-weight:900}
+.a:hover.can{box-shadow:0 0 22px #6cf,inset 0 0 14px #000;border-color:#fff}
+.a.sel{background:linear-gradient(#f5a623,#b46c00);box-shadow:0 0 30px #fa0;animation:selp .5s infinite alternate}
+@keyframes selp{to{filter:brightness(1.35)}}
+.a.right{background:linear-gradient(#2fd05a,#0c7a2c);box-shadow:0 0 34px #3f6;animation:none}
+.a.wrong{background:linear-gradient(#e53b3b,#7d0b0b);box-shadow:0 0 34px #f33;animation:none}
+.a.dead{opacity:.28;text-decoration:line-through;cursor:default}
+.a .tag{position:absolute;bottom:4px;right:6px;left:6px;font-size:14px;color:#ffe27a;font-weight:700}
+.a.glow{box-shadow:0 0 26px #ffe14a}
+/* ladder */
+#ladder{position:absolute;left:975px;top:70px;width:175px;height:392px;background:linear-gradient(#3a0d4f,#1c0630);border:3px solid #ff7be8;border-radius:6px;box-shadow:0 0 24px #d3c,inset 0 0 18px #000;padding:5px 6px;display:flex;flex-direction:column;gap:2px;direction:rtl}
+#ladder .lv{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:19px;font-weight:800;color:#e6c8ff;border-radius:3px}
+#ladder .lv i{font-style:normal;opacity:.7;font-size:13px}
+#ladder .lv.done{color:#7aff9a}
+#ladder .lv.cur{background:linear-gradient(#5b0a2e,#2a0314);color:#fff;border:2px solid #ff9fe4;box-shadow:0 0 18px #f6c;font-size:23px;transform:scale(1.07)}
+#ladder .cap{font-size:11px;text-align:center;color:#ffb4ee;margin-top:2px}
+#help{position:absolute;left:975px;top:478px;width:175px;display:flex;flex-direction:column;gap:8px}
+.h{height:40px;border-radius:9px;border:3px solid #fff;background:linear-gradient(#5ee7ff,#1b8fcc);color:#06304a;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 0 12px #4cf;direction:rtl;font-family:inherit}
+.h:disabled{filter:grayscale(1) brightness(.55);cursor:default;box-shadow:none}
+.h:not(:disabled):hover{filter:brightness(1.2)}
+#bot{position:absolute;left:150px;top:598px;width:790px;display:flex;gap:20px;justify-content:center;direction:rtl}
+.btn{padding:12px 30px;border-radius:14px;border:3px solid #fff;font-size:24px;font-weight:900;cursor:pointer;font-family:inherit;color:#fff;box-shadow:0 0 18px currentColor;animation:btnp 1s infinite alternate}
+@keyframes btnp{to{transform:scale(1.05)}}
+.btn.go{background:linear-gradient(#27c95a,#0b7a2d);color:#aaffc0}
+.btn.cash{background:linear-gradient(#ffb62e,#b36b00);color:#fff1c2}
+#mute{position:absolute;left:14px;top:12px;z-index:30;width:42px;height:42px;border-radius:50%;border:2px solid #8ac;background:rgba(0,0,30,.6);color:#fff;font-size:20px;cursor:pointer}
+/* overlays */
+.ov{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(20,20,120,.82),rgba(0,0,12,.95));direction:rtl;text-align:center;gap:16px}
+.ov.hide{display:none}
+.logo{font-size:130px;font-weight:900;line-height:1;text-shadow:0 0 30px #4af,0 0 6px #fff;animation:logo 2.2s infinite alternate}
+.logo b{color:#ffcf3a;text-shadow:0 0 30px #f90}
+@keyframes logo{to{transform:scale(1.04);text-shadow:0 0 50px #6cf,0 0 8px #fff}}
+.ov h2{font-size:56px;font-weight:900;text-shadow:0 0 22px #6cf}
+.ov p{font-size:22px;max-width:820px;line-height:1.5;color:#d6e4ff}
+.ov .big{font-size:70px;font-weight:900;color:#ffd23f;text-shadow:0 0 28px #f90}
+.ov .btn{margin-top:8px;font-size:30px}
+#fx{position:absolute;inset:0;pointer-events:none;z-index:45}
+.shake{animation:shk .5s}
+@keyframes shk{0%,100%{transform:translate(0)}20%{transform:translate(-8px,4px)}40%{transform:translate(7px,-5px)}60%{transform:translate(-6px,3px)}80%{transform:translate(5px,-2px)}}
+.zoom{animation:zm 1.2s}
+@keyframes zm{50%{transform:scale(1.04)}}
+
+.row{position:relative}
+.row::after{content:"";position:absolute;left:-7px;right:-7px;bottom:-4px;height:4px;background:linear-gradient(#9fb6ff,#3a4fb8 60%,#16206a);box-shadow:0 3px 8px rgba(0,0,0,.6),0 0 10px rgba(110,160,255,.5);border-radius:2px}
+#wall{gap:5px!important;transition:transform 1s cubic-bezier(.3,.8,.3,1)}
+.halo{position:absolute;left:150px;top:60px;width:760px;height:300px;background:radial-gradient(ellipse,rgba(110,160,255,.55),transparent 65%);animation:halo 3s ease-in-out infinite alternate;pointer-events:none}
+@keyframes halo{to{opacity:.55;transform:scale(1.06)}}
+.bk{position:absolute;border-radius:50%;pointer-events:none;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.1;transform:scale(.7)}50%{opacity:.9;transform:scale(1.2)}}
+#qbar::before{content:"";position:absolute;top:0;bottom:0;width:90px;left:-120px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 4s infinite}
+@keyframes shine{0%,60%{left:-120px}100%{left:880px}}
+#qbar{overflow:hidden;position:absolute}
+.a{background:linear-gradient(#3b0f2c,#150510 55%,#2a0a1c)!important;border:3px solid #d5d9ee!important;box-shadow:inset 0 0 14px #000,inset 0 2px 0 rgba(255,255,255,.25),0 4px 14px rgba(0,0,0,.6)}
+.a.right{background:linear-gradient(#2fd05a,#0c7a2c)!important}.a.wrong{background:linear-gradient(#e53b3b,#7d0b0b)!important}.a.sel{background:linear-gradient(#f5a623,#b46c00)!important}
+/* wall view (elimination) */
+#st.elim #wall{transform:translate(0,52px) scale(1.55)}
+#st.elim #qbar,#st.elim #ans,#st.elim #ladder,#st.elim #help,#st.elim #msg,#st.elim #bot,#st.elim #one,#st.elim #ring,#st.elim .hud,#st.elim #ans *{visibility:hidden}
+#st.elim #qbar,#st.elim #ans,#st.elim #ladder,#st.elim #help,#st.elim #msg,#st.elim #bot,#st.elim #one,#st.elim #ring,#st.elim .halo{opacity:0!important;pointer-events:none;transition:opacity .5s}
+#st.elim .bk{opacity:.3}
+.b.pw{background:radial-gradient(ellipse at 50% 30%,#ffb0b0,#e5182c 65%,#7a0010)!important;box-shadow:inset 0 0 8px rgba(255,255,255,.5)}
+.b.pr{background:radial-gradient(ellipse at 50% 30%,#bcd2ff,#2f5cf0 65%,#10208a)!important}
+.b.pw.show{animation:pwp .35s infinite alternate}
+@keyframes pwp{to{filter:brightness(1.35)}}
+#elimBar{position:absolute;left:210px;top:556px;width:860px;display:none;flex-direction:column;align-items:center;gap:8px;z-index:12}
+#elimBar.on{display:flex;animation:ebin .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes ebin{from{transform:translateY(80px);opacity:0}}
+#elimRow{display:flex;direction:ltr;height:78px;width:100%;border:3px solid #c8cbe0;border-radius:6px;overflow:hidden;box-shadow:0 0 30px rgba(120,150,255,.6)}
+#eIcon{width:96px;background:linear-gradient(#a50f1f,#5a0510);display:flex;align-items:center;justify-content:center;border-right:3px solid #c8cbe0}
+#eIcon svg{width:52px;height:52px;filter:drop-shadow(0 0 6px #f66)}
+#eCountBox{flex:0 0 250px;background:linear-gradient(#e8e9f2,#a9abc0);color:#2b1450;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900}
+#eCount{font-size:50px;line-height:44px}#eCountBox small{font-size:14px;font-weight:800;direction:rtl}
+#eGainBox{flex:1;background:linear-gradient(#6a1b7d,#2f0a47);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;text-shadow:0 0 14px #f9f}
+#eGain{font-size:50px;line-height:44px;direction:rtl}#eGainBox small{font-size:14px;direction:rtl;color:#f3c9ff}
+#eTotal{direction:rtl;font-size:30px;font-weight:900;color:#ffd23f;background:rgba(10,10,50,.85);border:3px solid #ffd23f;border-radius:30px;padding:2px 34px;text-shadow:0 0 16px #f90;box-shadow:0 0 26px #fa0;opacity:0;transform:scale(.5);transition:all .5s cubic-bezier(.2,1.6,.4,1)}
+#eTotal.on{opacity:1;transform:none}
+#eRow2{display:flex}
+#remBox{position:absolute;left:215px;top:8px;display:none;direction:ltr;height:54px;border:3px solid #c8cbe0;border-radius:5px;overflow:hidden;z-index:12}
+#remBox.on{display:flex}
+#remBox i{width:48px;background:linear-gradient(#e8e8f6,#9fa2c0);display:flex;align-items:center;justify-content:center}
+#remBox b{padding:0 14px;background:linear-gradient(#3a1a6a,#1d0a3a);font-size:30px;line-height:48px;direction:rtl;font-weight:900;color:#fff}
+#remBox b small{font-size:13px;opacity:.85;margin-left:6px}
+#fx2{position:absolute;inset:0;pointer-events:none;z-index:46}
+/* menu */
+.mbtn{display:block;width:440px;margin:7px auto;padding:13px 0;font-size:30px;font-weight:900;color:#fff;font-family:inherit;border-radius:16px;border:3px solid #cfe6ff;background:linear-gradient(#4a8cf0,#1b3aa0);box-shadow:0 0 22px rgba(90,160,255,.8),inset 0 2px 0 rgba(255,255,255,.4);cursor:pointer;position:relative;overflow:hidden;text-shadow:0 2px 6px #002}
+.mbtn:hover{filter:brightness(1.25);transform:scale(1.04)}
+.mbtn::after{content:"";position:absolute;top:0;bottom:0;width:70px;left:-100px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);animation:shine2 3.5s infinite}
+@keyframes shine2{0%,55%{left:-100px}100%{left:480px}}
+.mbtn.start{background:linear-gradient(#ffcf3a,#c77800);color:#2a1400;font-size:38px;padding:17px 0;border-color:#fff1b0;box-shadow:0 0 34px #fb0,inset 0 2px 0 rgba(255,255,255,.6);text-shadow:none;animation:stp 1.2s infinite alternate}
+@keyframes stp{to{transform:scale(1.045);box-shadow:0 0 50px #fc3}}
+.mpanel{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.mpanel.hide{display:none}
+.mlogo{font-size:128px;font-weight:900;line-height:1;background:linear-gradient(#fff,#bfe0ff 45%,#4a8cf0);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px #4af) drop-shadow(0 4px 0 #0a1a6a);animation:logo 2.4s infinite alternate}
+.mlogo b{background:linear-gradient(#fff6c0,#ffcf3a 50%,#e07a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px #f90)}
+.ribbon{font-size:30px;font-weight:900;padding:4px 44px;background:linear-gradient(90deg,transparent,#c0126a 15%,#e8308a 50%,#c0126a 85%,transparent);text-shadow:0 0 10px #fff;letter-spacing:2px;margin-bottom:12px}
+.card{max-width:900px;max-height:520px;overflow:auto;text-align:right;background:rgba(10,14,70,.75);border:2px solid #7fb4ff;border-radius:14px;padding:18px 28px;font-size:21px;line-height:1.55;box-shadow:0 0 30px rgba(80,140,255,.5);direction:rtl}
+.card h3{font-size:28px;color:#ffd23f;margin-bottom:6px}
+.card li{margin-right:22px;margin-bottom:5px}
+.card table{width:100%;border-collapse:collapse;font-size:21px}.card td{padding:3px 10px;border-bottom:1px solid rgba(255,255,255,.15)}
+.card .note{font-size:15px;opacity:.75;margin-top:8px}
+.set{display:flex;align-items:center;gap:16px;justify-content:space-between;margin:12px 0;font-size:24px}
+.set input[type=range]{width:360px;accent-color:#ffcf3a;height:8px}
+.set .v{width:60px;text-align:left;direction:ltr;color:#ffd23f;font-weight:900}
+#menuBtn{position:absolute;left:62px;top:12px;z-index:30;height:42px;padding:0 14px;border-radius:21px;border:2px solid #8ac;background:rgba(0,0,30,.6);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit}
+#menu.sub .mlogo{font-size:64px;animation:none}#menu.sub .ribbon{font-size:20px;margin-bottom:4px}#menu.sub .card{max-height:430px}#menu.sub .card td{padding:1px 10px;font-size:19px}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<radialGradient id="sk0" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fbe0c8"/><stop offset=".7" stop-color="#f1c4a0"/><stop offset="1" stop-color="#d9a37e"/></radialGradient>
+<radialGradient id="sk1" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ecc29c"/><stop offset=".7" stop-color="#dba87c"/><stop offset="1" stop-color="#bf8860"/></radialGradient>
+<radialGradient id="sk2" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#d8a47a"/><stop offset=".7" stop-color="#c58c62"/><stop offset="1" stop-color="#a06c46"/></radialGradient>
+<radialGradient id="sk3" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#9a6a46"/><stop offset=".7" stop-color="#835536"/><stop offset="1" stop-color="#5e3a22"/></radialGradient>
+<radialGradient id="sk4" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#6a4228"/><stop offset=".7" stop-color="#55331e"/><stop offset="1" stop-color="#3a2212"/></radialGradient>
+<linearGradient id="faceL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
+<linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient></defs></svg>
+<div id="wrap"><div id="st">
+ <div class="beam b1"></div><div class="beam b2"></div><div class="beam b3"></div><div class="beam b4"></div><div class="beam b5"></div><div class="beam b6"></div>
+ <div class="truss tl"></div><div class="truss tr"></div><div class="crowd cl"></div><div class="crowd cr"></div>
+ <div class="bands"></div><div class="floor"></div>
+ <div id="ring"></div>
+ <svg id="one" viewBox="0 0 130 190" style="filter:drop-shadow(0 0 6px #8cf) drop-shadow(0 0 14px #48f)"><defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a1a"/><stop offset="1" stop-color="#05050f"/></linearGradient></defs>
+  <circle cx="66" cy="26" r="19" fill="url(#og)" stroke="#9cf" stroke-width="1.5"/><path d="M40 52 Q66 44 92 52 L100 110 L88 112 L86 190 L46 190 L44 112 L32 110Z" fill="url(#og)" stroke="#9cf" stroke-width="1.5"/><path d="M60 46 L66 70 L72 46Z" fill="#101a3a"/></svg>
+ <div class="halo"></div><div id="bkc"></div><div id="wall"></div>
+ <div class="hud" id="score">קופה: ₪0</div>
+ <div class="hud" id="title"><b>1</b> נגד <b>100</b></div>
+ <div class="hud" id="left">נותרו: 100</div>
+ <div id="msg"></div>
+ <div id="qbar"></div>
+ <div id="ans"></div>
+ <div id="ladder"></div>
+ <div id="help"><button class="h" id="hPoll">סקר את הנבחרת</button><button class="h" id="hAsk">שאל את הנבחרת</button><button class="h" id="hTrust">סמוך על הנבחרת</button></div>
+ <div id="bot"></div>
+ <div class="vig"></div><div class="redtint" id="red"></div><div class="flash" id="flash"></div>
+ <canvas id="fx" width="1280" height="720"></canvas>
+<div id="elimBar"><div id="elimRow"><div id="eIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.5" fill="#fff"/><path d="M3 22c0-6 4-9 9-9s9 3 9 9z" fill="#fff"/></svg></div><div id="eCountBox"><span id="eCount">0</span><small>הודחו מהנבחרת</small></div><div id="eGainBox"><span id="eGain">₪0</span><small>נוסף לקופה בשלב הזה</small></div></div><div id="eTotal">סה"כ בקופה: <span id="eTotalV"></span></div></div>
+ <div id="remBox"><i><svg viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="7" r="4.5" fill="#2b1450"/><path d="M3 22c0-6 4-9 9-9s9 3 9 9z" fill="#2b1450"/></svg></i><b><span id="remNum">100</span><small>נגדך</small></b></div>
+ <canvas id="fx2" width="1280" height="720"></canvas>
+ <button id="mute" title="צליל">🔊</button><button id="menuBtn">☰ תפריט</button>
+ <div class="ov" id="menu"><div class="mlogo"><b>1</b> נגד <b>100</b></div><div class="ribbon">הגרסה הישראלית</div>
+  <div class="mpanel" id="mMain">
+   <button class="mbtn start" id="bStart">התחל משחק</button>
+   <button class="mbtn" id="bHow">איך משחקים</button>
+   <button class="mbtn" id="bLadder">סולם הכסף</button>
+   <button class="mbtn" id="bSound">הגדרות שמע</button>
+   <button class="mbtn" id="bAbout">אודות</button>
+   <p style="font-size:15px;opacity:.7;margin-top:6px" id="qcount"></p></div>
+  <div class="mpanel hide" id="mHow"><div class="card"><h3>איך משחקים</h3><ul>
+   <li>אתה המתמודד היחיד מול נבחרת של 100 איש. בכל שאלה שלוש תשובות: א, ב, ג.</li>
+   <li>קודם הנבחרת מצביעה, ואחר כך אתה עונה.</li>
+   <li>אם צדקת: כל מי שטעה בנבחרת מודח, ואתה מרוויח כסף על כל טועה, לפי ערך השלב.</li>
+   <li>אם טעית: אתה מודח ומאבד את כל הכסף שצברת.</li>
+   <li>"כסף או נבחרת": בין השאלות, אחרי השאלה הרביעית, אפשר לפרוש עם הקופה.</li>
+   <li>הדחת את כל המאה? מיליון שקל.</li>
+   <li>שלושה גלגלי הצלה, כל אחד פעם אחת: <b>סקר את הנבחרת</b> (כמה בחרו בתשובה ונימוק של חבר נבחרת), <b>שאל את הנבחרת</b> (שני חברים, אחד צודק ואחד טועה, והתשובה השלישית נפסלת), <b>סמוך על הנבחרת</b> (ננעלים על תשובת הרוב).</li></ul></div><button class="mbtn" data-back>חזרה</button></div>
+  <div class="mpanel hide" id="mLadder"><div class="card" id="ladderCard"></div><button class="mbtn" data-back>חזרה</button></div>
+  <div class="mpanel hide" id="mSound"><div class="card" style="min-width:640px"><h3>הגדרות שמע</h3>
+   <div class="set"><span>מוזיקה</span><input type="range" id="rMusic" min="0" max="100"><span class="v" id="vMusic"></span></div>
+   <div class="set"><span>אפקטים</span><input type="range" id="rSfx" min="0" max="100"><span class="v" id="vSfx"></span></div>
+   <div class="set"><span>השתקה</span><input type="checkbox" id="cMute" style="width:30px;height:30px;accent-color:#ffcf3a"></div>
+   <button class="mbtn" id="bTing" style="width:300px;font-size:22px;padding:8px 0">בדיקת צליל (טינג)</button></div><button class="mbtn" data-back>חזרה</button></div>
+  <div class="mpanel hide" id="mAbout"><div class="card"><h3>אודות</h3><p>משחק טריוויה בהשראת התוכנית "1 נגד 100", בגרסה הישראלית: מתמודד אחד מול נבחרת של מאה. חוקי המשחק, סולם הכסף וגלגלי ההצלה מבוססים על הגרסה הישראלית של התוכנית כפי שמתועדת בוויקיפדיה העברית.</p>
+   <p>כל השאלות בעברית ונבדקו מול מקורות. המוזיקה, האפקטים והדמויות נוצרו במיוחד למשחק (מקוריים, לא מהתוכנית).</p>
+   <p class="note">משחק מעריצים ללא קשר לתוכנית, לערוץ או למפיקים. גרסה 2.</p></div><button class="mbtn" data-back>חזרה</button></div>
+ </div>
+ <div class="ov hide" id="end"></div>
+</div></div>
+<script>
+const Core=(function(){
+'use strict';
+const BANK=[{"t": "מהי בירת צרפת?", "r": "פריז", "w": ["ליון", "מרסיי"], "d": 1}, {"t": "באיזו עיר נמצא מגדל אייפל?", "r": "פריז", "w": ["רומא", "לונדון"], "d": 1}, {"t": "איזו חיה מכונה \"מלך החיות\"?", "r": "אריה", "w": ["נמר", "פיל"], "d": 1}, {"t": "כמה צבעים יש בקשת?", "r": "7", "w": ["5", "9"], "d": 1}, {"t": "כמה ימים יש בשנה רגילה (לא מעוברת)?", "r": "365", "w": ["360", "366"], "d": 1}, {"t": "מהו הכוכב הגדול ביותר במערכת השמש?", "r": "צדק", "w": ["שבתאי", "מאדים"], "d": 1}, {"t": "איזה כוכב לכת מכונה \"הכוכב האדום\"?", "r": "מאדים", "w": ["נוגה", "צדק"], "d": 1}, {"t": "איזה כוכב לכת ידוע בטבעות שלו?", "r": "שבתאי", "w": ["מאדים", "כוכב חמה"], "d": 1}, {"t": "מהו הסימון הכימי של מים?", "r": "H2O", "w": ["CO2", "O2"], "d": 1}, {"t": "כמה שחקנים משחקים מכל קבוצה על המגרש בכדורגל?", "r": "11", "w": ["9", "13"], "d": 1}, {"t": "כמה שחקנים משחקים מכל קבוצה על המגרש בכדורסל?", "r": "5", "w": ["6", "7"], "d": 1}, {"t": "כמה טבעות יש בסמל האולימפי?", "r": "5", "w": ["4", "6"], "d": 1}, {"t": "באיזה ספורט מתחרים בווימבלדון?", "r": "טניס", "w": ["גולף", "קריקט"], "d": 1}, {"t": "איזו חיה היא הגבוהה ביותר בעולם?", "r": "ג'ירפה", "w": ["פיל", "גמל"], "d": 1}, {"t": "איזו חיה היא היבשתית המהירה ביותר?", "r": "ברדלס", "w": ["אריה", "סוס"], "d": 1}, {"t": "איזו חיה מייצרת דבש?", "r": "דבורה", "w": ["צרעה", "פרפר"], "d": 1}, {"t": "כמה רגליים יש לעכביש?", "r": "8", "w": ["6", "10"], "d": 1}, {"t": "כמה אותיות יש באלפבית העברי?", "r": "22", "w": ["24", "26"], "d": 1}, {"t": "מהי האות האחרונה באלפבית העברי?", "r": "ת", "w": ["ש", "ץ"], "d": 1}, {"t": "מהי בירת איטליה?", "r": "רומא", "w": ["מילאנו", "פירנצה"], "d": 1}, {"t": "מהי בירת מצרים?", "r": "קהיר", "w": ["אלכסנדריה", "לוקסור"], "d": 1}, {"t": "מהי בירת יפן?", "r": "טוקיו", "w": ["אוסקה", "קיוטו"], "d": 1}, {"t": "מהי בירת ספרד?", "r": "מדריד", "w": ["ברצלונה", "סביליה"], "d": 1}, {"t": "מהי בירת גרמניה?", "r": "ברלין", "w": ["מינכן", "המבורג"], "d": 1}, {"t": "באיזו מדינה נמצא הקולוסיאום?", "r": "איטליה", "w": ["יוון", "ספרד"], "d": 1}, {"t": "באיזו מדינה נמצאות הפירמידות של גיזה?", "r": "מצרים", "w": ["מקסיקו", "סודאן"], "d": 1}, {"t": "באיזו עיר נמצא פסל החירות?", "r": "ניו יורק", "w": ["וושינגטון", "בוסטון"], "d": 1}, {"t": "כמה זה 12 כפול 12?", "r": "144", "w": ["124", "132"], "d": 1}, {"t": "כמה סנטימטרים יש במטר?", "r": "100", "w": ["10", "1,000"], "d": 1}, {"t": "כמה צלעות יש לתמניון?", "r": "8", "w": ["6", "10"], "d": 1}, {"t": "כמה מיתרים יש לגיטרה קלאסית סטנדרטית?", "r": "6", "w": ["4", "8"], "d": 1}, {"t": "כמה ימים נמשך חג החנוכה?", "r": "8", "w": ["7", "9"], "d": 1}, {"t": "באיזה חג אוכלים מצות?", "r": "פסח", "w": ["שבועות", "סוכות"], "d": 1}, {"t": "באיזה חג קוראים את מגילת אסתר?", "r": "פורים", "w": ["חנוכה", "שבועות"], "d": 1}, {"t": "באיזה חג מציינים את מתן תורה?", "r": "שבועות", "w": ["סוכות", "פסח"], "d": 1}, {"t": "מהי בירת ישראל?", "r": "ירושלים", "w": ["תל אביב", "חיפה"], "d": 1}, {"t": "באיזו עיר נמצא יד ושם?", "r": "ירושלים", "w": ["תל אביב", "חיפה"], "d": 1}, {"t": "מהו המטבע של מדינת ישראל?", "r": "שקל חדש", "w": ["דינר", "לירה"], "d": 1}, {"t": "מי היה ראש הממשלה הראשון של ישראל?", "r": "דוד בן-גוריון", "w": ["לוי אשכול", "מנחם בגין"], "d": 1}, {"t": "באיזו שנה הוקמה מדינת ישראל?", "r": "1948", "w": ["1947", "1950"], "d": 1}, {"t": "מי הייתה ראש הממשלה הראשונה של ישראל?", "r": "גולדה מאיר", "w": ["שולמית אלוני", "טלי פלוסקוב"], "d": 1}, {"t": "מי היה נשיא ישראל הראשון?", "r": "חיים ויצמן", "w": ["יצחק בן צבי", "זלמן שזר"], "d": 1}, {"t": "מהי העיר הדרומית ביותר בישראל?", "r": "אילת", "w": ["באר שבע", "דימונה"], "d": 1}, {"t": "באיזו עיר נמצא הטכניון?", "r": "חיפה", "w": ["תל אביב", "ירושלים"], "d": 1}, {"t": "באיזו עיר נמצא מכון ויצמן למדע?", "r": "רחובות", "w": ["חיפה", "ראשון לציון"], "d": 1}, {"t": "באיזו עיר נמצא בית החולים סורוקה?", "r": "באר שבע", "w": ["אשדוד", "אשקלון"], "d": 1}, {"t": "מי צייר את המונה ליזה?", "r": "לאונרדו דה וינצ'י", "w": ["מיכלאנג'לו", "פיקאסו"], "d": 1}, {"t": "מי כתב את סדרת \"הארי פוטר\"?", "r": "ג'יי קיי רולינג", "w": ["רואלד דאל", "סי אס לואיס"], "d": 1}, {"t": "איזו חברה יצרה את האייפון?", "r": "אפל", "w": ["סמסונג", "מיקרוסופט"], "d": 1}, {"t": "מי הקים את פייסבוק?", "r": "מארק צוקרברג", "w": ["ביל גייטס", "אילון מאסק"], "d": 1}, {"t": "מי יצר את מיקי מאוס?", "r": "וולט דיסני", "w": ["וולט וויטמן", "וולטר מתאו"], "d": 1}, {"t": "איזה סרט אנימציה כולל את הדמות סימבה?", "r": "מלך האריות", "w": ["בימבו", "שרק"], "d": 1}, {"t": "מי הלהקה שהוציאה את השיר \"Hey Jude\"?", "r": "הביטלס", "w": ["קווין", "הרולינג סטונס"], "d": 1}, {"t": "מי מכונה \"מלך הפופ\"?", "r": "מייקל ג'קסון", "w": ["אלביס פרסלי", "פרינס"], "d": 1}, {"t": "מי שרה את \"Rolling in the Deep\"?", "r": "אדל", "w": ["ביונסה", "טיילור סוויפט"], "d": 1}, {"t": "מהי בירת אוסטרליה?", "r": "קנברה", "w": ["סידני", "מלבורן"], "d": 2}, {"t": "מהי בירת קנדה?", "r": "אוטווה", "w": ["טורונטו", "ונקובר"], "d": 2}, {"t": "מהי בירת טורקיה?", "r": "אנקרה", "w": ["איסטנבול", "איזמיר"], "d": 2}, {"t": "מהי בירת ברזיל?", "r": "ברזיליה", "w": ["ריו דה ז'נרו", "סאו פאולו"], "d": 2}, {"t": "מהי בירת שווייץ?", "r": "ברן", "w": ["ציריך", "ז'נבה"], "d": 2}, {"t": "מהי בירת הולנד?", "r": "אמסטרדם", "w": ["רוטרדם", "האג"], "d": 2}, {"t": "מהי בירת פורטוגל?", "r": "ליסבון", "w": ["פורטו", "קואימברה"], "d": 2}, {"t": "מהי בירת ארגנטינה?", "r": "בואנוס איירס", "w": ["סנטיאגו", "לימה"], "d": 2}, {"t": "מהי בירת תאילנד?", "r": "בנגקוק", "w": ["האנוי", "מנילה"], "d": 2}, {"t": "מהי בירת ניו זילנד?", "r": "וולינגטון", "w": ["אוקלנד", "כרייסטצ'רץ'"], "d": 2}, {"t": "מהי בירת מרוקו?", "r": "רבאט", "w": ["קזבלנקה", "מרקש"], "d": 2}, {"t": "מהי העיר הגדולה ביותר בטורקיה?", "r": "איסטנבול", "w": ["אנקרה", "בורסה"], "d": 2}, {"t": "באיזו עיר נמצא הקרמלין?", "r": "מוסקבה", "w": ["סנט פטרסבורג", "קייב"], "d": 2}, {"t": "באיזו מדינה נמצא הטאג' מהאל?", "r": "הודו", "w": ["פקיסטן", "בנגלדש"], "d": 2}, {"t": "איזה סמל כימי יש לזהב?", "r": "Au", "w": ["Ag", "Go"], "d": 2}, {"t": "איזה סמל כימי יש לכסף?", "r": "Ag", "w": ["Au", "Si"], "d": 2}, {"t": "איזה סמל כימי יש לנתרן?", "r": "Na", "w": ["N", "Ni"], "d": 2}, {"t": "איזה סמל כימי יש לאשלגן?", "r": "K", "w": ["P", "Po"], "d": 2}, {"t": "איזה מתכת נוזלית בטמפרטורת החדר?", "r": "כספית", "w": ["ברזל", "אלומיניום"], "d": 2}, {"t": "איזה גז הוא הנפוץ ביותר באטמוספירה של כדור הארץ?", "r": "חנקן", "w": ["חמצן", "פחמן דו-חמצני"], "d": 2}, {"t": "איזה יסוד הוא הנפוץ ביותר ביקום?", "r": "מימן", "w": ["חמצן", "הליום"], "d": 2}, {"t": "כמה עצמות יש בגוף של אדם בוגר?", "r": "206", "w": ["180", "250"], "d": 2}, {"t": "מהו האיבר הגדול ביותר בגוף האדם?", "r": "העור", "w": ["הכבד", "הלב"], "d": 2}, {"t": "כמה שיניים יש לאדם בוגר (כולל שיני בינה)?", "r": "32", "w": ["28", "36"], "d": 2}, {"t": "איזה ויטמין הגוף מייצר בחשיפה לשמש?", "r": "ויטמין D", "w": ["ויטמין C", "ויטמין A"], "d": 2}, {"t": "איזה איבר מייצר אינסולין?", "r": "הלבלב", "w": ["הכבד", "הכליה"], "d": 2}, {"t": "מהי העצם הארוכה ביותר בגוף האדם?", "r": "עצם הירך", "w": ["עצם השוק", "עצם הזרוע"], "d": 2}, {"t": "איזה גז הצמחים קולטים בתהליך הפוטוסינתזה?", "r": "פחמן דו-חמצני", "w": ["חמצן", "חנקן"], "d": 2}, {"t": "כמה כוכבי לכת יש במערכת השמש?", "r": "8", "w": ["9", "10"], "d": 2}, {"t": "מהו הכוכב הקרוב ביותר לשמש?", "r": "כוכב חמה", "w": ["נוגה", "מאדים"], "d": 2}, {"t": "מי היה האדם הראשון שצעד על הירח?", "r": "ניל ארמסטרונג", "w": ["בז אולדרין", "יורי גגרין"], "d": 2}, {"t": "באיזו שנה נחתו בני אדם לראשונה על הירח?", "r": "1969", "w": ["1961", "1975"], "d": 2}, {"t": "מי פיתח את תורת היחסות?", "r": "אלברט איינשטיין", "w": ["אייזק ניוטון", "נילס בוהר"], "d": 2}, {"t": "מי גילה את הפניצילין?", "r": "אלכסנדר פלמינג", "w": ["לואי פסטר", "אדוארד ג'נר"], "d": 2}, {"t": "מי ניסח את תורת האבולוציה בספרו \"מוצא המינים\"?", "r": "צ'רלס דרווין", "w": ["גרגור מנדל", "תומס אדיסון"], "d": 2}, {"t": "מהו האוקיינוס הגדול ביותר?", "r": "האוקיינוס השקט", "w": ["האטלנטי", "ההודי"], "d": 2}, {"t": "מהו ההר הגבוה בעולם מעל פני הים?", "r": "האוורסט", "w": ["קילימנג'רו", "מון בלאן"], "d": 2}, {"t": "מהי המדינה הגדולה בעולם בשטחה?", "r": "רוסיה", "w": ["קנדה", "סין"], "d": 2}, {"t": "מהי המדינה המאוכלסת ביותר בעולם?", "r": "הודו", "w": ["סין", "ארצות הברית"], "d": 2}, {"t": "מהו המדבר החם הגדול בעולם?", "r": "סהרה", "w": ["קלהארי", "גובי"], "d": 2}, {"t": "מהו ההר הגבוה באפריקה?", "r": "קילימנג'רו", "w": ["הר קניה", "האוורסט"], "d": 2}, {"t": "באיזו שנה פרצה מלחמת העולם השנייה?", "r": "1939", "w": ["1941", "1936"], "d": 2}, {"t": "באיזו שנה פרצה מלחמת העולם הראשונה?", "r": "1914", "w": ["1917", "1905"], "d": 2}, {"t": "באיזו שנה נפלה חומת ברלין?", "r": "1989", "w": ["1991", "1985"], "d": 2}, {"t": "באיזו שנה טבעה הטיטאניק?", "r": "1912", "w": ["1905", "1920"], "d": 2}, {"t": "מי גילה את אמריקה ב-1492?", "r": "כריסטופר קולומבוס", "w": ["וסקו דה גאמה", "מגלן"], "d": 2}, {"t": "מי היה נשיא ארצות הברית הראשון?", "r": "ג'ורג' וושינגטון", "w": ["אברהם לינקולן", "תומס ג'פרסון"], "d": 2}, {"t": "מי היה ראש ממשלת בריטניה במלחמת העולם השנייה?", "r": "ווינסטון צ'רצ'יל", "w": ["טוני בלייר", "מרגרט תאצ'ר"], "d": 2}, {"t": "מי הוביל את מאבק העצמאות הלא אלים של הודו?", "r": "מהטמה גנדי", "w": ["נהרו", "בוז"], "d": 2}, {"t": "מי הלחין את הסימפוניה התשיעית עם \"שיר לשמחה\"?", "r": "בטהובן", "w": ["מוצרט", "באך"], "d": 2}, {"t": "מי צייר את \"ליל כוכבים\"?", "r": "ואן גוך", "w": ["מונה", "דאלי"], "d": 2}, {"t": "מי כתב את \"רומיאו ויוליה\"?", "r": "וויליאם שייקספיר", "w": ["צ'רלס דיקנס", "ג'ין אוסטין"], "d": 2}, {"t": "מי הלחין את \"ארבע העונות\"?", "r": "ויוואלדי", "w": ["שופן", "ורדי"], "d": 2}, {"t": "מי ביים את \"פארק היורה\"?", "r": "סטיבן שפילברג", "w": ["ג'יימס קמרון", "כריסטופר נולאן"], "d": 2}, {"t": "איזה שחקן גילם את ג'ק בסרט \"טיטאניק\"?", "r": "ליאונרדו דיקפריו", "w": ["בראד פיט", "טום קרוז"], "d": 2}, {"t": "איזה סרט זכה באוסקר לסרט הטוב ביותר בשנת 2020?", "r": "פרזיט", "w": ["1917", "ג'וקר"], "d": 2}, {"t": "מי זכה במונדיאל 2022?", "r": "ארגנטינה", "w": ["צרפת", "ברזיל"], "d": 2}, {"t": "באיזו מדינה נערך מונדיאל 2018?", "r": "רוסיה", "w": ["גרמניה", "קטאר"], "d": 2}, {"t": "איזו נבחרת זכתה במונדיאל 2014?", "r": "גרמניה", "w": ["ארגנטינה", "הולנד"], "d": 2}, {"t": "איזו קבוצה זכתה במספר הרב ביותר של גביעי אירופה/ליגת האלופות?", "r": "ריאל מדריד", "w": ["ברצלונה", "מילאן"], "d": 2}, {"t": "באיזו עיר נערכה אולימפיאדת הקיץ של 2008?", "r": "בייג'ינג", "w": ["אתונה", "לונדון"], "d": 2}, {"t": "ממה עשויה טחינה?", "r": "שומשום", "w": ["חומוס", "שקדים"], "d": 2}, {"t": "איזה מבין אלה אינו אחד משבעת המינים?", "r": "תפוח", "w": ["רימון", "תמר"], "d": 2}, {"t": "באיזה חודש עברי חל ראש השנה?", "r": "תשרי", "w": ["ניסן", "אלול"], "d": 2}, {"t": "באיזה חודש עברי חל חג הפורים?", "r": "אדר", "w": ["סיון", "שבט"], "d": 2}, {"t": "באיזה חודש עברי מתחיל חג החנוכה?", "r": "כסלו", "w": ["טבת", "חשוון"], "d": 2}, {"t": "מי הוביל את בני ישראל ביציאה ממצרים?", "r": "משה", "w": ["אהרן", "יהושע"], "d": 2}, {"t": "מי הביס את גוליית?", "r": "דוד", "w": ["שאול", "שמשון"], "d": 2}, {"t": "מי נבלע על ידי דג גדול לפי המקרא?", "r": "יונה", "w": ["נח", "איוב"], "d": 2}, {"t": "מי בנה את בית המקדש הראשון?", "r": "שלמה", "w": ["דוד", "חזקיהו"], "d": 2}, {"t": "באיזה ספר מתחיל התנ\"ך?", "r": "בראשית", "w": ["שמות", "תהילים"], "d": 2}, {"t": "כמה שבטים היו לבני ישראל?", "r": "12", "w": ["10", "14"], "d": 2}, {"t": "באיזו שנה נערכה מלחמת ששת הימים?", "r": "1967", "w": ["1956", "1973"], "d": 2}, {"t": "באיזו שנה פרצה מלחמת יום הכיפורים?", "r": "1973", "w": ["1967", "1982"], "d": 2}, {"t": "מי היה ראש הממשלה בזמן מלחמת יום הכיפורים?", "r": "גולדה מאיר", "w": ["יצחק רבין", "לוי אשכול"], "d": 2}, {"t": "מי היה ראש הממשלה בזמן מלחמת ששת הימים?", "r": "לוי אשכול", "w": ["דוד בן-גוריון", "גולדה מאיר"], "d": 2}, {"t": "מי היה שר הביטחון במלחמת ששת הימים?", "r": "משה דיין", "w": ["יצחק רבין", "אריאל שרון"], "d": 2}, {"t": "מי נרצח בנובמבר 1995 בכיכר מלכי ישראל?", "r": "יצחק רבין", "w": ["שמעון פרס", "מנחם בגין"], "d": 2}, {"t": "באיזה שנה נחתם הסכם השלום בין ישראל למצרים?", "r": "1979", "w": ["1973", "1994"], "d": 2}, {"t": "באיזו שנה נחתם הסכם השלום בין ישראל לירדן?", "r": "1994", "w": ["1979", "1993"], "d": 2}, {"t": "מי היה ראש ממשלת ישראל שחתם על הסכם השלום עם מצרים?", "r": "מנחם בגין", "w": ["יצחק שמיר", "יצחק רבין"], "d": 2}, {"t": "מי כתב את \"מדינת היהודים\"?", "r": "בנימין זאב הרצל", "w": ["חיים נחמן ביאליק", "זאב ז'בוטינסקי"], "d": 2}, {"t": "מי חידש את השפה העברית המדוברת בעת החדשה?", "r": "אליעזר בן-יהודה", "w": ["חיים ויצמן", "מנדלי מוכר ספרים"], "d": 2}, {"t": "מהו הקיבוץ הראשון בישראל?", "r": "דגניה", "w": ["גבעת ברנר", "עין גדי"], "d": 2}, {"t": "איזו עיר בישראל מוכרת כ\"העיר הלבנה\" בזכות סגנון הבאוהאוס?", "r": "תל אביב", "w": ["חיפה", "נתניה"], "d": 2}, {"t": "מי כתבה את המילים של \"ירושלים של זהב\"?", "r": "נעמי שמר", "w": ["רחל שפירא", "לאה גולדברג"], "d": 2}, {"t": "מי כתב את מילות \"התקווה\"?", "r": "נפתלי הרץ אימבר", "w": ["חיים נחמן ביאליק", "נתן אלתרמן"], "d": 2}, {"t": "איזה שיר זכה באירוויזיון 1979 עבור ישראל?", "r": "הללויה", "w": ["אבניבי", "דיווה"], "d": 2}, {"t": "מי זכתה באירוויזיון 2018 עם השיר \"Toy\"?", "r": "נטע ברזילי", "w": ["עדן אלנה", "ריטה"], "d": 2}, {"t": "מי זכה באירוויזיון 1998 עם השיר \"דיווה\"?", "r": "דנה אינטרנשיונל", "w": ["עופרה חזה", "שרית חדד"], "d": 2}, {"t": "איזו חברה ישראלית פיתחה את מערכת כיפת ברזל?", "r": "רפאל", "w": ["אל על", "טבע"], "d": 2}, {"t": "איזו אפליקציית ניווט פותחה בישראל?", "r": "Waze", "w": ["Citymapper", "Maps.me"], "d": 2}, {"t": "איזו תוכנת צ'אט ותיקה פותחה בישראל ב-1996?", "r": "ICQ", "w": ["MSN", "Skype"], "d": 2}, {"t": "מי זכתה בזהב אולימפי בהתעמלות אמנותית (מכשירים) בטוקיו?", "r": "לינוי אשרם", "w": ["ארטיום דולגופיאט", "גל פרידמן"], "d": 2}, {"t": "באיזו שנה העפילה נבחרת ישראל לטורניר גביע העולם בכדורגל, בפעם היחידה?", "r": "1970", "w": ["1966", "1982"], "d": 2}, {"t": "מי כתב את \"סיפור על אהבה וחושך\"?", "r": "עמוס עוז", "w": ["אהרן אפלפלד", "דויד גרוסמן"], "d": 2}, {"t": "מי כתב את הרומן \"המשפט\"?", "r": "פרנץ קפקא", "w": ["תומס מאן", "ז'אן פול סארטר"], "d": 3}, {"t": "מי כתב את \"מלחמה ושלום\"?", "r": "לב טולסטוי", "w": ["פיודור דוסטויבסקי", "אנטון צ'כוב"], "d": 3}, {"t": "מי כתב את \"דון קישוט\"?", "r": "מיגל דה סרוונטס", "w": ["לופה דה וגה", "גבריאל גרסיה מרקס"], "d": 3}, {"t": "מי כתב את \"מובי דיק\"?", "r": "הרמן מלוויל", "w": ["מארק טוויין", "ארנסט המינגווי"], "d": 3}, {"t": "מי נחשב לכותב האיליאדה והאודיסיאה?", "r": "הומרוס", "w": ["סופוקלס", "ארסטו"], "d": 3}, {"t": "איזה מספר אטומי יש לחמצן?", "r": "8", "w": ["6", "16"], "d": 3}, {"t": "מהו סוג הדם התורם האוניברסלי לתרומת כדוריות דם אדומות?", "r": "O שלילי", "w": ["AB חיובי", "A שלילי"], "d": 3}, {"t": "כמה לבבות יש לתמנון?", "r": "3", "w": ["1", "2"], "d": 3}, {"t": "איזה יונק יכול לעוף באמת?", "r": "עטלף", "w": ["סנאי מעופף", "קוף"], "d": 3}, {"t": "מהי החיה היבשתית הגדולה ביותר?", "r": "פיל אפריקאי", "w": ["קרנף", "היפופוטם"], "d": 3}, {"t": "באיזו שנה הוכרז פלוטו מחדש כ\"כוכב לכת ננסי\"?", "r": "2006", "w": ["1998", "2012"], "d": 3}, {"t": "מהי המהירות המשוערת של האור בריק?", "r": "300,000 ק\"מ בשנייה", "w": ["150,000 ק\"מ בשנייה", "1,000,000 ק\"מ בשנייה"], "d": 3}, {"t": "מהו האגם העמוק ביותר בעולם?", "r": "באיקל", "w": ["ויקטוריה", "סופיריור"], "d": 3}, {"t": "מהי המדינה הקטנה ביותר בעולם?", "r": "הוותיקן", "w": ["מונקו", "סן מרינו"], "d": 3}, {"t": "כמה מדינות חברות באו\"ם?", "r": "193", "w": ["180", "205"], "d": 3}, {"t": "כמה מדינות חברות באיחוד האירופי?", "r": "27", "w": ["25", "30"], "d": 3}, {"t": "מהו הנהר הארוך ביותר באירופה?", "r": "הוולגה", "w": ["הריין", "הדנובה"], "d": 3}, {"t": "מהי הנקודה הנמוכה ביותר ביבשה בעולם?", "r": "ים המלח", "w": ["ים סוף", "אגם ויקטוריה"], "d": 3}, {"t": "לאיזה גוף מים נשפך נהר הירדן?", "r": "ים המלח", "w": ["הים התיכון", "ים סוף"], "d": 3}, {"t": "מהי העיר הגדולה בישראל לפי מספר תושבים?", "r": "ירושלים", "w": ["תל אביב", "חיפה"], "d": 3}, {"t": "מהי העיר השלישית בגודלה בישראל לפי מספר תושבים?", "r": "חיפה", "w": ["ראשון לציון", "פתח תקווה"], "d": 3}, {"t": "מהי יחידת המדידה של זרם חשמלי?", "r": "אמפר", "w": ["וולט", "אוהם"], "d": 3}, {"t": "באיזו שנה נערכו הבחירות הראשונות לכנסת?", "r": "1949", "w": ["1948", "1951"], "d": 3}, {"t": "כמה חברי כנסת יש בכנסת ישראל?", "r": "120", "w": ["100", "150"], "d": 3}, {"t": "באיזו שנה התקבלה ישראל לאו\"ם?", "r": "1949", "w": ["1948", "1952"], "d": 3}, {"t": "מי היה נשיא ישראל השני?", "r": "יצחק בן צבי", "w": ["זלמן שזר", "אפרים קציר"], "d": 3}, {"t": "מי היה ראש עיריית ירושלים משנת 1965 ועד 1993?", "r": "טדי קולק", "w": ["אהוד אולמרט", "שלמה להט"], "d": 3}, {"t": "מי היה הרמטכ\"ל בזמן מלחמת ששת הימים?", "r": "יצחק רבין", "w": ["חיים בר-לב", "משה דיין"], "d": 3}, {"t": "באיזו שנה התפנתה ישראל מגוש קטיף?", "r": "2005", "w": ["2000", "2008"], "d": 3}, {"t": "מי היה ראש הממשלה בזמן ההתנתקות מגוש קטיף?", "r": "אריאל שרון", "w": ["אהוד ברק", "אהוד אולמרט"], "d": 3}, {"t": "באיזה מבצע חולצו בני ערובה באוגנדה ב-1976?", "r": "מבצע אנטבה", "w": ["מבצע מוסה", "מבצע ברק"], "d": 3}, {"t": "מי פיקד על מבצע אנטבה ונהרג בו?", "r": "יוני נתניהו", "w": ["אהוד ברק", "עמירם לוין"], "d": 3}, {"t": "באיזו עיר נערך הקונגרס הציוני הראשון?", "r": "בזל", "w": ["ז'נבה", "וינה"], "d": 3}, {"t": "באיזו שנה נערך הקונגרס הציוני הראשון?", "r": "1897", "w": ["1881", "1917"], "d": 3}, {"t": "באיזו שנה הוקמה העיר תל אביב?", "r": "1909", "w": ["1921", "1948"], "d": 3}, {"t": "באיזה שנה שוגר הלוויין הישראלי הראשון \"אופק 1\"?", "r": "1988", "w": ["1978", "1999"], "d": 3}, {"t": "מי היה האסטרונאוט הישראלי הראשון?", "r": "אילן רמון", "w": ["יצחק מרדכי", "יואב גלנט"], "d": 3}, {"t": "מי זכה בזהב האולימפי הראשון של ישראל (2004)?", "r": "גל פרידמן", "w": ["ארטיום דולגופיאט", "שחר צוברי"], "d": 3}, {"t": "מי אמר \"אנחנו על המפה\" אחרי הזכייה של מכבי תל אביב ב-1977?", "r": "טל ברודי", "w": ["מוטי ארואסטי", "דורון ג'מצ'י"], "d": 3}, {"t": "באיזו שנה זכתה מכבי תל אביב לראשונה ביורוליג?", "r": "1977", "w": ["1967", "1982"], "d": 3}, {"t": "מי זכה בפרס נובל לספרות מישראל ב-1966?", "r": "ש\"י עגנון", "w": ["עמוס עוז", "חיים נחמן ביאליק"], "d": 3}, {"t": "מי זכה בפרס נובל לשלום ב-1994 יחד עם רבין וערפאת?", "r": "שמעון פרס", "w": ["אהוד ברק", "מנחם בגין"], "d": 3}, {"t": "מי זכה בפרס נובל לכימיה ב-2009 מישראל?", "r": "עדה יונת", "w": ["דן שכטמן", "אהרן צ'חנובר"], "d": 3}, {"t": "מי זכה בפרס נובל לכלכלה ב-2002 (ישראלי)?", "r": "דניאל כהנמן", "w": ["רוברט אומן", "אריאל רובינשטיין"], "d": 3}, {"t": "מי שר לראשונה את \"ירושלים של זהב\"?", "r": "שולי נתן", "w": ["חנן יובל", "אילנית"], "d": 3}, {"t": "מי היה חבר בלהקת \"הגשש החיוור\"?", "r": "גברי בנאי", "w": ["ששון גבאי", "אבי קושניר"], "d": 3}, {"t": "מי יצרו את הסדרה \"פאודה\"?", "r": "ליאור רז ואבי יששכרוף", "w": ["אסי עזר ואביב גפן", "אלון אבוטבול ואורי בירן"], "d": 3}, {"t": "באיזו שנה התפרק הגוש הקומוניסטי ונפלה ברית המועצות?", "r": "1991", "w": ["1985", "1999"], "d": 3}, {"t": "מי הביס את נפוליאון בקרב ווטרלו?", "r": "וולינגטון ובליכר", "w": ["קוטוזוב", "נלסון"], "d": 3}, {"t": "איזה הר געש קבר את פומפיי?", "r": "וזוב", "w": ["אטנה", "סטרומבולי"], "d": 3}, {"t": "באיזו מדינה החלה המהפכה התעשייתית?", "r": "בריטניה", "w": ["גרמניה", "ארצות הברית"], "d": 3}, {"t": "מי היה נשיא ארצות הברית בזמן מלחמת האזרחים?", "r": "אברהם לינקולן", "w": ["אנדרו ג'קסון", "יוליסס גרנט"], "d": 3}, {"t": "מי גילו את מבנה ה-DNA ב-1953?", "r": "ווטסון וקריק", "w": ["קוך ופסטר", "מנדל ודרווין"], "d": 3}, {"t": "כמה ימים יש בשבוע?", "r": "7", "w": ["5", "6"], "d": 1}, {"t": "איזה צבע מתקבל מערבוב כחול וצהוב?", "r": "ירוק", "w": ["סגול", "כתום"], "d": 1}, {"t": "איזו חיה אומרת \"מיאו\"?", "r": "חתול", "w": ["כלב", "ארנב"], "d": 1}, {"t": "איזו חיה אומרת \"הב הב\"?", "r": "כלב", "w": ["חתול", "סוס"], "d": 1}, {"t": "איזה פרי הוא צהוב ומעוקל?", "r": "בננה", "w": ["תפוז", "אגס"], "d": 1}, {"t": "איזה ירק כתום ומוכר כמאכל ארנבים?", "r": "גזר", "w": ["מלפפון", "חציל"], "d": 1}, {"t": "כמה חודשים יש בשנה?", "r": "12", "w": ["10", "13"], "d": 1}, {"t": "איזה גוף שמימי מאיר את כדור הארץ ביום?", "r": "השמש", "w": ["הירח", "מאדים"], "d": 1}, {"t": "כמה גלגלים יש לאופניים רגילים?", "r": "2", "w": ["3", "4"], "d": 1}, {"t": "כמה אצבעות יש ביד אחת של אדם?", "r": "5", "w": ["4", "6"], "d": 1}, {"t": "באיזה איבר משתמשים כדי לראות?", "r": "עין", "w": ["אוזן", "אף"], "d": 1}, {"t": "איזו חיה גדולה יש לה חדק?", "r": "פיל", "w": ["היפופוטם", "קרנף"], "d": 1}, {"t": "איזו חיה ידועה בפסים שחורים ולבנים?", "r": "זברה", "w": ["סוס", "פרה"], "d": 1}, {"t": "מה אוכלות פרות?", "r": "עשב", "w": ["בשר", "דגים"], "d": 1}, {"t": "איזו חיה מטילה ביצים?", "r": "תרנגולת", "w": ["פרה", "חתולה"], "d": 1}, {"t": "מהי בירת בריטניה?", "r": "לונדון", "w": ["מנצ'סטר", "אדינבורו"], "d": 1}, {"t": "מהי בירת ארצות הברית?", "r": "וושינגטון", "w": ["ניו יורק", "לוס אנג'לס"], "d": 1}, {"t": "מהי בירת רוסיה?", "r": "מוסקבה", "w": ["סנט פטרסבורג", "קייב"], "d": 1}, {"t": "מהי בירת סין?", "r": "בייג'ינג", "w": ["שנגחאי", "הונג קונג"], "d": 1}, {"t": "מהי בירת יוון?", "r": "אתונה", "w": ["סלוניקי", "רודוס"], "d": 1}, {"t": "מהי בירת ירדן?", "r": "עמאן", "w": ["דמשק", "ביירות"], "d": 1}, {"t": "באיזו עיר נמצא הכותל המערבי?", "r": "ירושלים", "w": ["חיפה", "צפת"], "d": 1}, {"t": "על איזה ים שוכנת העיר אילת?", "r": "ים סוף", "w": ["הים התיכון", "ים המלח"], "d": 1}, {"t": "על איזה ים שוכנת העיר חיפה?", "r": "הים התיכון", "w": ["ים סוף", "ים המלח"], "d": 1}, {"t": "כמה נרות יש בחנוכייה ביום האחרון של חנוכה (כולל השמש)?", "r": "9", "w": ["8", "10"], "d": 1}, {"t": "מה מטבלים בדבש בראש השנה?", "r": "תפוח", "w": ["בננה", "תפוז"], "d": 1}, {"t": "באיזה חג בונים סוכה?", "r": "סוכות", "w": ["פסח", "פורים"], "d": 1}, {"t": "באיזה חג נהוג להתחפש?", "r": "פורים", "w": ["סוכות", "שבועות"], "d": 1}, {"t": "באיזה חג שומעים תקיעות שופר בבית הכנסת?", "r": "ראש השנה", "w": ["פורים", "חנוכה"], "d": 1}, {"t": "באיזה ספורט מתחרים בשולחן עם מחבט וכדור קטן?", "r": "טניס שולחן", "w": ["כדורסל", "שחייה"], "d": 1}, {"t": "כמה נקודות שווה סל שנקלע מחוץ לקשת בכדורסל?", "r": "3", "w": ["1", "4"], "d": 1}, {"t": "לאיזה כלי נגינה יש 88 קלידים?", "r": "פסנתר", "w": ["גיטרה", "חליל"], "d": 1}, {"t": "באיזה כלי נגינה מנגנים בנשיפה?", "r": "חליל", "w": ["תוף", "גיטרה"], "d": 1}, {"t": "כמה שעות יש ביממה?", "r": "24", "w": ["12", "48"], "d": 1}, {"t": "איזה גז אנחנו נושמים כדי לחיות?", "r": "חמצן", "w": ["חנקן", "מימן"], "d": 1}, {"t": "על איזה כוכב לכת אנחנו חיים?", "r": "כדור הארץ", "w": ["מאדים", "נוגה"], "d": 1}, {"t": "איזו חיה אומרת \"מו\"?", "r": "פרה", "w": ["כבשה", "עז"], "d": 1}, {"t": "איזה מכשיר מודד טמפרטורה?", "r": "מד חום", "w": ["שעון", "סרגל"], "d": 1}, {"t": "באיזה חג אוכלים סופגניות?", "r": "חנוכה", "w": ["סוכות", "פסח"], "d": 1}, {"t": "מהי בירת דרום קוריאה?", "r": "סיאול", "w": ["פוסאן", "טוקיו"], "d": 2}, {"t": "מהי בירת מקסיקו?", "r": "מקסיקו סיטי", "w": ["גוודלחרה", "קנקון"], "d": 2}, {"t": "מהי בירת שוודיה?", "r": "שטוקהולם", "w": ["גטבורג", "אוסלו"], "d": 2}, {"t": "מהי בירת נורווגיה?", "r": "אוסלו", "w": ["ברגן", "קופנהגן"], "d": 2}, {"t": "מהי בירת דנמרק?", "r": "קופנהגן", "w": ["אורהוס", "הלסינקי"], "d": 2}, {"t": "מהי בירת פולין?", "r": "ורשה", "w": ["קרקוב", "גדנסק"], "d": 2}, {"t": "מהי בירת אוסטריה?", "r": "וינה", "w": ["זלצבורג", "ציריך"], "d": 2}, {"t": "מהי בירת הונגריה?", "r": "בודפשט", "w": ["וינה", "פראג"], "d": 2}, {"t": "מהי בירת צ'כיה?", "r": "פראג", "w": ["ברנו", "בודפשט"], "d": 2}, {"t": "מהי בירת אירלנד?", "r": "דבלין", "w": ["בלפסט", "קורק"], "d": 2}, {"t": "מהי בירת קובה?", "r": "הוואנה", "w": ["קינגסטון", "סנטו דומינגו"], "d": 2}, {"t": "מהי בירת קניה?", "r": "ניירובי", "w": ["מומבסה", "קמפלה"], "d": 2}, {"t": "מהי בירת אתיופיה?", "r": "אדיס אבבה", "w": ["אסמרה", "ניירובי"], "d": 2}, {"t": "מהי בירת הודו?", "r": "ניו דלהי", "w": ["מומבאי", "קולקטה"], "d": 2}, {"t": "מהי בירת וייטנאם?", "r": "האנוי", "w": ["הו צ'י מין סיטי", "בנגקוק"], "d": 2}, {"t": "מהי בירת פרו?", "r": "לימה", "w": ["קוסקו", "בוגוטה"], "d": 2}, {"t": "מהי בירת צ'ילה?", "r": "סנטיאגו", "w": ["ולפראיסו", "לימה"], "d": 2}, {"t": "מהי בירת קולומביה?", "r": "בוגוטה", "w": ["מדיין", "קראקס"], "d": 2}, {"t": "מהי בירת איראן?", "r": "טהרן", "w": ["בגדד", "איספהאן"], "d": 2}, {"t": "מהי בירת עיראק?", "r": "בגדד", "w": ["בצרה", "מוסול"], "d": 2}, {"t": "מהי בירת סעודיה?", "r": "ריאד", "w": ["ג'דה", "מכה"], "d": 2}, {"t": "מהי בירת ניגריה?", "r": "אבוג'ה", "w": ["לאגוס", "קאנו"], "d": 2}, {"t": "מהי בירת פינלנד?", "r": "הלסינקי", "w": ["טמפרה", "שטוקהולם"], "d": 2}, {"t": "מהי בירת רומניה?", "r": "בוקרשט", "w": ["סופיה", "בלגרד"], "d": 2}, {"t": "מהי בירת בלגיה?", "r": "בריסל", "w": ["אנטוורפן", "ברוז'"], "d": 2}, {"t": "באיזו יבשת נמצאת ברזיל?", "r": "דרום אמריקה", "w": ["אפריקה", "אסיה"], "d": 2}, {"t": "איזו יבשת היא הגדולה בעולם?", "r": "אסיה", "w": ["אפריקה", "צפון אמריקה"], "d": 2}, {"t": "איזו יבשת היא הקטנה ביותר?", "r": "אוסטרליה", "w": ["אירופה", "אנטארקטיקה"], "d": 2}, {"t": "איזו יבשת מכוסה כמעט כולה בקרח?", "r": "אנטארקטיקה", "w": ["אירופה", "אסיה"], "d": 2}, {"t": "באיזה נהר שוכנת העיר קהיר?", "r": "הנילוס", "w": ["הפרת", "הדנובה"], "d": 2}, {"t": "באיזה נהר שוכנת העיר פריז?", "r": "הסיין", "w": ["הריין", "הדנובה"], "d": 2}, {"t": "באיזה נהר שוכנת העיר לונדון?", "r": "התמזה", "w": ["הסיין", "האלבה"], "d": 2}, {"t": "איזה נהר עובר בבודפשט ובווינה?", "r": "הדנובה", "w": ["הריין", "הוולגה"], "d": 2}, {"t": "איזה הר געש מכוסה שלג מזוהה עם יפן?", "r": "פוג'י", "w": ["אוורסט", "קילימנג'רו"], "d": 2}, {"t": "מהו האי הגדול בעולם?", "r": "גרינלנד", "w": ["מדגסקר", "בורנאו"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר ברצלונה?", "r": "ספרד", "w": ["איטליה", "פורטוגל"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר מילאנו?", "r": "איטליה", "w": ["צרפת", "שווייץ"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר מומבאי?", "r": "הודו", "w": ["פקיסטן", "סרי לנקה"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר דובאי?", "r": "איחוד האמירויות", "w": ["סעודיה", "קטאר"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר קייפטאון?", "r": "דרום אפריקה", "w": ["קניה", "נמיביה"], "d": 2}, {"t": "במה מפורסמת העיר פיזה?", "r": "המגדל הנטוי", "w": ["הקולוסיאום", "הפנתיאון"], "d": 2}, {"t": "כמה ירחים טבעיים יש לכדור הארץ?", "r": "1", "w": ["2", "0"], "d": 2}, {"t": "באיזו טמפרטורה (צלזיוס) מים קופאים?", "r": "0", "w": ["10", "-10"], "d": 2}, {"t": "לאיזו קבוצת בעלי חיים שייכים דולפינים?", "r": "יונקים", "w": ["דגים", "זוחלים"], "d": 2}, {"t": "איזו חיה היא זוחל?", "r": "תנין", "w": ["צפרדע", "סלמנדרה"], "d": 2}, {"t": "כמה רגליים יש לחרק?", "r": "6", "w": ["8", "4"], "d": 2}, {"t": "איך נקרא התהליך שבו צמחים מפיקים אנרגיה מאור השמש?", "r": "פוטוסינתזה", "w": ["נשימה", "אידוי"], "d": 2}, {"t": "איזה חומר בדם נותן לו צבע אדום?", "r": "המוגלובין", "w": ["כלורופיל", "קרוטן"], "d": 2}, {"t": "איזה חומר נותן לעלים צבע ירוק?", "r": "כלורופיל", "w": ["המוגלובין", "קרטין"], "d": 2}, {"t": "איזו מתכת מושך מגנט?", "r": "ברזל", "w": ["אלומיניום", "נחושת"], "d": 2}, {"t": "באיזו יחידה נמדד כוח?", "r": "ניוטון", "w": ["ג'ול", "וואט"], "d": 2}, {"t": "באיזו יחידה נמדד הספק חשמלי?", "r": "וואט", "w": ["ג'ול", "וולט"], "d": 2}, {"t": "מהו הסמל הכימי של ברזל?", "r": "Fe", "w": ["Ir", "F"], "d": 2}, {"t": "מהו הסמל הכימי של פחמן?", "r": "C", "w": ["Ca", "Co"], "d": 2}, {"t": "מהו הסמל הכימי של חמצן?", "r": "O", "w": ["Au", "Ag"], "d": 2}, {"t": "מהו הסמל הכימי של הליום?", "r": "He", "w": ["H", "Hl"], "d": 2}, {"t": "מהו הסמל הכימי של סידן?", "r": "Ca", "w": ["C", "Cd"], "d": 2}, {"t": "איזו תרבות בנתה את הפירמידות בגיזה?", "r": "המצרים הקדמונים", "w": ["הרומאים", "המאיה"], "d": 2}, {"t": "מי הוכתר לקיסר צרפת ב-1804?", "r": "נפוליאון", "w": ["לואי ה-14", "שארל דה גול"], "d": 2}, {"t": "מי היה מנהיג גרמניה הנאצית?", "r": "אדולף היטלר", "w": ["בניטו מוסוליני", "יוסף סטלין"], "d": 2}, {"t": "באיזו שנה הוקם האו\"ם?", "r": "1945", "w": ["1948", "1939"], "d": 2}, {"t": "מי היה נשיא ארצות הברית בעת פיגועי 11 בספטמבר?", "r": "ג'ורג' בוש (הבן)", "w": ["ביל קלינטון", "ברק אובמה"], "d": 2}, {"t": "מי היה נשיא ארצות הברית הראשון ממוצא אפריקאי?", "r": "ברק אובמה", "w": ["ג'ו ביידן", "ביל קלינטון"], "d": 2}, {"t": "איזו מלכה בריטית מלכה 70 שנה, מ-1952 עד 2022?", "r": "אליזבת השנייה", "w": ["ויקטוריה", "אליזבת הראשונה"], "d": 2}, {"t": "באיזו שנה פרצה המהפכה הצרפתית?", "r": "1789", "w": ["1776", "1815"], "d": 2}, {"t": "באיזו שנה הוכרזה העצמאות של ארצות הברית?", "r": "1776", "w": ["1789", "1812"], "d": 2}, {"t": "איזו עיר מכונה \"בירת הצפון\" של ישראל?", "r": "חיפה", "w": ["טבריה", "נצרת"], "d": 2}, {"t": "באיזה אתר במדבר יהודה נמצאו מגילות ים המלח?", "r": "קומראן", "w": ["מצדה", "עין גדי"], "d": 2}, {"t": "איזו עיר בצפון ישראל מזוהה עם הקבלה?", "r": "צפת", "w": ["טבריה", "חיפה"], "d": 2}, {"t": "מהו אגם המים המתוקים הגדול בישראל?", "r": "הכנרת", "w": ["אגם החולה", "ים המלח"], "d": 2}, {"t": "מצפה רמון שוכנת על שפת איזה מכתש?", "r": "מכתש רמון", "w": ["מכתש קטן", "מכתש הגדול"], "d": 2}, {"t": "באיזו שנה הוקם צה\"ל?", "r": "1948", "w": ["1949", "1956"], "d": 2}, {"t": "איזו להקה ביצעה את \"הללויה\" באירוויזיון 1979?", "r": "גלי עטרי ומילק אנד האני", "w": ["הברירה הטבעית", "הגשש החיוור"], "d": 2}, {"t": "מי כתב את \"הנסיך הקטן\"?", "r": "אנטואן דה סנט-אכזופרי", "w": ["ז'ול ורן", "ויקטור הוגו"], "d": 2}, {"t": "מי כתב את \"שלושת המוסקטרים\"?", "r": "אלכסנדר דיומא", "w": ["ויקטור הוגו", "אונורה דה בלזק"], "d": 2}, {"t": "מי כתב את \"עלובי החיים\"?", "r": "ויקטור הוגו", "w": ["אלכסנדר דיומא", "ז'ול ורן"], "d": 2}, {"t": "מי כתב את \"מסע אל מרכז כדור הארץ\"?", "r": "ז'ול ורן", "w": ["ה' ג' וולס", "ג'ק לונדון"], "d": 2}, {"t": "מי כתב את \"אליס בארץ הפלאות\"?", "r": "לואיס קרול", "w": ["רואלד דאל", "הנס כריסטיאן אנדרסן"], "d": 2}, {"t": "מי צייר את \"הצעקה\"?", "r": "אדוורד מונק", "w": ["ון גוך", "סלבדור דאלי"], "d": 2}, {"t": "מי פיסל את הפסל \"דוד\" המפורסם בפירנצה?", "r": "מיכלאנג'לו", "w": ["דונטלו", "רודן"], "d": 2}, {"t": "מי צייר את \"גרניקה\"?", "r": "פבלו פיקאסו", "w": ["סלבדור דאלי", "חואן מירו"], "d": 2}, {"t": "מי הלחין את \"אגם הברבורים\"?", "r": "צ'ייקובסקי", "w": ["שופן", "ליסט"], "d": 2}, {"t": "מי הוא הזמר שכתב ושר את \"Imagine\"?", "r": "ג'ון לנון", "w": ["פול מקרטני", "בוב דילן"], "d": 2}, {"t": "מי שרה את \"Like a Prayer\"?", "r": "מדונה", "w": ["ליידי גאגא", "ג'ניפר לופז"], "d": 2}, {"t": "איזו להקה הוציאה את \"Bohemian Rhapsody\"?", "r": "קווין", "w": ["לד זפלין", "פינק פלויד"], "d": 2}, {"t": "מי ביים את \"הסנדק\"?", "r": "פרנסיס פורד קופולה", "w": ["מרטין סקורסזה", "אלפרד היצ'קוק"], "d": 2}, {"t": "באיזה סרט מופיעה הדמות דארת' ויידר?", "r": "מלחמת הכוכבים", "w": ["מסע בין כוכבים", "מטריקס"], "d": 2}, {"t": "מי גילם את קפטן ג'ק ספארו בסרטי שודדי הקריביים?", "r": "ג'וני דפ", "w": ["בראד פיט", "אורלנדו בלום"], "d": 2}, {"t": "איזה סרט אנימציה עוסק בדג ליצן שמחפש את בנו?", "r": "מצא את נמו", "w": ["שרק", "קונג פו פנדה"], "d": 2}, {"t": "באיזה סרט אנימציה מופיעה הדמות אלזה?", "r": "פרוזן", "w": ["מולאן", "רפונזל"], "d": 2}, {"t": "מי כתב את \"שר הטבעות\"?", "r": "ג'ון טולקין", "w": ["סי אס לואיס", "ג'ורג' ר' ר' מרטין"], "d": 2}, {"t": "מי הקים את אמזון?", "r": "ג'ף בזוס", "w": ["אילון מאסק", "סטיב ג'ובס"], "d": 2}, {"t": "מי הקים את אפל יחד עם סטיב ווזניאק?", "r": "סטיב ג'ובס", "w": ["ביל גייטס", "לארי פייג'"], "d": 2}, {"t": "באיזו שנה יצא האייפון הראשון?", "r": "2007", "w": ["2003", "2010"], "d": 2}, {"t": "בכדורגל, איזה צבע כרטיס מוציא שחקן מהמשחק?", "r": "אדום", "w": ["צהוב", "כחול"], "d": 2}, {"t": "כמה זמן נמשך משחק כדורגל רגיל, ללא הארכה?", "r": "90 דקות", "w": ["60 דקות", "80 דקות"], "d": 2}, {"t": "באיזה ספורט מתחרים בטור דה פראנס?", "r": "אופניים", "w": ["ריצה", "שחייה"], "d": 2}, {"t": "מי היה קפטן נבחרת ארגנטינה שהרים את גביע העולם ב-2022?", "r": "ליאו מסי", "w": ["סרחיו אגוארו", "אנחל די מריה"], "d": 2}, {"t": "איזה כדורגלן פורטוגלי מכונה CR7?", "r": "כריסטיאנו רונאלדו", "w": ["לואיס פיגו", "פפה"], "d": 2}, {"t": "מי הטניסאי השווייצרי שזכה ב-20 תארי גראנד סלאם?", "r": "רוג'ר פדרר", "w": ["ראפאל נדאל", "נובאק ג'וקוביץ'"], "d": 2}, {"t": "איזה שחקן שיחק עם מספר 23 בשיקגו בולס וזכה בשש אליפויות NBA?", "r": "מייקל ג'ורדן", "w": ["קובי בראיינט", "לברון ג'יימס"], "d": 2}, {"t": "באיזו מדינה הומצא הכדורסל?", "r": "ארצות הברית", "w": ["קנדה", "בריטניה"], "d": 2}, {"t": "באיזו מדינה נערכה אולימפיאדת הקיץ של 2016?", "r": "ברזיל", "w": ["סין", "יפן"], "d": 2}, {"t": "מי בנה את התיבה לפי המקרא?", "r": "נח", "w": ["אברהם", "משה"], "d": 2}, {"t": "מי היה האב הראשון מבין שלושת האבות?", "r": "אברהם", "w": ["יצחק", "יעקב"], "d": 2}, {"t": "כמה בנים היו ליעקב?", "r": "12", "w": ["10", "7"], "d": 2}, {"t": "איזה ים נבקע ביציאת מצרים לפי המקרא?", "r": "ים סוף", "w": ["הים התיכון", "ים המלח"], "d": 2}, {"t": "כמה מכות היו במצרים לפי המקרא?", "r": "10", "w": ["7", "12"], "d": 2}, {"t": "מהו חומש דברים בסדר החומשים?", "r": "האחרון", "w": ["הראשון", "השני"], "d": 2}, {"t": "באיזה חג אוכלים חרוסת?", "r": "פסח", "w": ["סוכות", "שבועות"], "d": 2}, {"t": "באיזה חג נהוג לאכול מאכלי חלב?", "r": "שבועות", "w": ["פסח", "חנוכה"], "d": 2}, {"t": "באיזה יום צמים ומציינים את חורבן בית המקדש?", "r": "תשעה באב", "w": ["ל\"ג בעומר", "יום כיפור"], "d": 2}, {"t": "איזו גבינה מקובלת בפיצה?", "r": "מוצרלה", "w": ["גבינת עיזים", "בולגרית"], "d": 2}, {"t": "מאיזו מדינה מגיעה הפיצה?", "r": "איטליה", "w": ["צרפת", "יוון"], "d": 2}, {"t": "מאיזו מדינה מגיע הסושי?", "r": "יפן", "w": ["סין", "תאילנד"], "d": 2}, {"t": "ממה מכינים יין?", "r": "ענבים", "w": ["תפוחים", "שעורה"], "d": 2}, {"t": "ממה מכינים בירה?", "r": "שעורה", "w": ["ענבים", "תפוחים"], "d": 2}, {"t": "מהו המרכיב העיקרי בגואקמולי?", "r": "אבוקדו", "w": ["עגבנייה", "מלפפון"], "d": 2}, {"t": "באיזו שפה אומרים \"Hola\" לשלום?", "r": "ספרדית", "w": ["איטלקית", "פורטוגזית"], "d": 2}, {"t": "מהי השפה הרשמית של ברזיל?", "r": "פורטוגזית", "w": ["ספרדית", "אנגלית"], "d": 2}, {"t": "באיזו שפה נכתב הקוראן?", "r": "ערבית", "w": ["פרסית", "עברית"], "d": 2}, {"t": "באיזו מדינה נמצאת העיר טימבוקטו?", "r": "מאלי", "w": ["ניז'ר", "סודאן"], "d": 3}, {"t": "איזה נהר מוביל את נפח המים הגדול ביותר בעולם?", "r": "האמזונס", "w": ["אורינוקו", "הנילוס"], "d": 3}, {"t": "איזה מפל נחשב לגבוה בעולם?", "r": "אנחל", "w": ["ויקטוריה", "ניאגרה"], "d": 3}, {"t": "איזו מדינה מחזיקה במספר הגדול ביותר של אגמים?", "r": "קנדה", "w": ["פינלנד", "רוסיה"], "d": 3}, {"t": "איזה מצר מפריד בין ספרד למרוקו?", "r": "מצר גיברלטר", "w": ["הבוספורוס", "מצר ברינג"], "d": 3}, {"t": "איזו תעלה מחברת בין הים התיכון לים סוף?", "r": "תעלת סואץ", "w": ["תעלת פנמה", "תעלת קורינתוס"], "d": 3}, {"t": "איזו תעלה מחברת בין האוקיינוס האטלנטי לאוקיינוס השקט?", "r": "תעלת פנמה", "w": ["תעלת סואץ", "תעלת קיל"], "d": 3}, {"t": "באיזו מדינה נמצא אתר מאצ'ו פיצ'ו?", "r": "פרו", "w": ["בוליביה", "אקוואדור"], "d": 3}, {"t": "איזה כוכב לכת הוא השני בגודלו במערכת השמש?", "r": "שבתאי", "w": ["נפטון", "אורנוס"], "d": 3}, {"t": "איזה כוכב לכת רחוק ביותר מהשמש?", "r": "נפטון", "w": ["אורנוס", "שבתאי"], "d": 3}, {"t": "איזה אטום הוא הקל ביותר?", "r": "מימן", "w": ["הליום", "ליתיום"], "d": 3}, {"t": "כמה כרומוזומים יש בתא רגיל של אדם?", "r": "46", "w": ["23", "48"], "d": 3}, {"t": "איזה תא בדם נושא חמצן?", "r": "כדורית דם אדומה", "w": ["כדורית דם לבנה", "טסית"], "d": 3}, {"t": "באיזה איבר נספג רוב המזון במערכת העיכול?", "r": "המעי הדק", "w": ["הקיבה", "המעי הגס"], "d": 3}, {"t": "איזה איבר מסנן את הדם ומייצר שתן?", "r": "הכליה", "w": ["הכבד", "הטחול"], "d": 3}, {"t": "כמה חדרים יש בלב אדם?", "r": "4", "w": ["2", "3"], "d": 3}, {"t": "מהו אורך המרתון?", "r": "42.195 ק\"מ", "w": ["40 ק\"מ", "45 ק\"מ"], "d": 3}, {"t": "איזה צבע באור הנראה הוא בעל אורך הגל הארוך ביותר?", "r": "אדום", "w": ["סגול", "ירוק"], "d": 3}, {"t": "כמה זמן לוקח לאור מהשמש להגיע לכדור הארץ בקירוב?", "r": "8 דקות", "w": ["8 שניות", "8 שעות"], "d": 3}, {"t": "באיזו שנה שוגר הלוויין ספוטניק 1?", "r": "1957", "w": ["1961", "1969"], "d": 3}, {"t": "מי היה האדם הראשון בחלל?", "r": "יורי גגרין", "w": ["ניל ארמסטרונג", "ג'ון גלן"], "d": 3}, {"t": "מי גילתה את הרדיום ואת הפולוניום?", "r": "מארי קירי", "w": ["רוזלינד פרנקלין", "ליזה מייטנר"], "d": 3}, {"t": "מי רשם את הפטנט הראשון על הטלפון?", "r": "אלכסנדר גרהם בל", "w": ["תומס אדיסון", "ניקולה טסלה"], "d": 3}, {"t": "מי המציא את הדפוס באותיות נעות באירופה?", "r": "יוהאן גוטנברג", "w": ["גלילאו גליליי", "לאונרדו דה וינצ'י"], "d": 3}, {"t": "מי הציע שכדור הארץ סובב סביב השמש בעת החדשה?", "r": "ניקולאוס קופרניקוס", "w": ["פטולמאוס", "ארכימדס"], "d": 3}, {"t": "איזה מלך אנגלי הוצא להורג ב-1649?", "r": "צ'רלס הראשון", "w": ["הנרי השמיני", "ג'ורג' השלישי"], "d": 3}, {"t": "מי היה הקיסר הרומי הראשון?", "r": "אוגוסטוס", "w": ["יוליוס קיסר", "נרון"], "d": 3}, {"t": "באיזה שנה פרצה המהפכה הרוסית של אוקטובר?", "r": "1917", "w": ["1905", "1921"], "d": 3}, {"t": "מי הקים את הרפובליקה העממית של סין ב-1949?", "r": "מאו דזה-דונג", "w": ["דנג שיאופינג", "צ'יאנג קאי-שק"], "d": 3}, {"t": "מי היה נשיא דרום אפריקה הראשון לאחר ביטול האפרטהייד?", "r": "נלסון מנדלה", "w": ["דזמונד טוטו", "תאבו אמבקי"], "d": 3}, {"t": "מי היה מלך ישראל הראשון לפי המקרא?", "r": "שאול", "w": ["דוד", "שלמה"], "d": 3}, {"t": "מי היה אחיו של משה ונבחר לכהן הגדול הראשון?", "r": "אהרן", "w": ["עלי", "פנחס"], "d": 3}, {"t": "מי היה הרמטכ\"ל הראשון של צה\"ל?", "r": "יעקב דורי", "w": ["יצחק רבין", "משה דיין"], "d": 3}, {"t": "באיזו שנה נפתחה האוניברסיטה העברית בירושלים?", "r": "1925", "w": ["1948", "1912"], "d": 3}, {"t": "באיזו שנה נוסדה חברת התעופה אל על?", "r": "1948", "w": ["1952", "1961"], "d": 3}, {"t": "מי היה ראש הממשלה הראשון של ישראל שנולד בארץ?", "r": "יצחק רבין", "w": ["אהוד ברק", "אריאל שרון"], "d": 3}, {"t": "מי כתבה את \"דירה להשכיר\"?", "r": "לאה גולדברג", "w": ["דליה רביקוביץ'", "רחל המשוררת"], "d": 3}, {"t": "מי כתב את הרומן \"מישהו לרוץ איתו\"?", "r": "דויד גרוסמן", "w": ["עמוס עוז", "א' ב' יהושע"], "d": 3}, {"t": "מי נחשב למשורר הלאומי של העם היהודי?", "r": "חיים נחמן ביאליק", "w": ["נתן אלתרמן", "שאול טשרניחובסקי"], "d": 3}, {"t": "איזו נבחרת זכתה במונדיאל 2010?", "r": "ספרד", "w": ["הולנד", "גרמניה"], "d": 3}, {"t": "איזו נבחרת זכתה במונדיאל 2006?", "r": "איטליה", "w": ["צרפת", "גרמניה"], "d": 3}, {"t": "איזו נבחרת זכתה במונדיאל 1998?", "r": "צרפת", "w": ["ברזיל", "איטליה"], "d": 3}, {"t": "איזו נבחרת זכתה במונדיאל 1994?", "r": "ברזיל", "w": ["איטליה", "ארגנטינה"], "d": 3}, {"t": "מי הבקיע את מספר השערים הגדול ביותר בתולדות המונדיאל?", "r": "מירוסלב קלוזה", "w": ["רונאלדו הברזילאי", "פלה"], "d": 3}, {"t": "באיזו מדינה נערכה אולימפיאדת הקיץ של 2012?", "r": "בריטניה", "w": ["סין", "יוון"], "d": 3}, {"t": "באיזו שנה הושק פייסבוק?", "r": "2004", "w": ["1999", "2008"], "d": 3}, {"t": "באיזו שנה הושקה חברת גוגל?", "r": "1998", "w": ["1994", "2002"], "d": 3}, {"t": "באיזה אלפבית כותבים רוסית?", "r": "קירילי", "w": ["לטיני", "יווני"], "d": 3}, {"t": "איזו להקה ביצעה את \"Hotel California\"?", "r": "איגלס", "w": ["הרולינג סטונס", "הבי ג'יז"], "d": 3}, {"t": "כמה אצבעות יש בשתי ידיים של אדם?", "r": "10", "w": ["8", "12"], "d": 1}, {"t": "איזה חג יהודי חוגגים עם סופגניות?", "r": "חנוכה", "w": ["שבועות", "סוכות"], "d": 1}, {"t": "איזה ים נמצא בדרום ישראל, באילת?", "r": "הים האדום", "w": ["הים השחור", "הים התיכון"], "d": 1}, {"t": "איזו עונה מגיעה אחרי החורף?", "r": "אביב", "w": ["קיץ", "סתיו"], "d": 1}, {"t": "איזה בעל חיים נקרא מלך החיות?", "r": "אריה", "w": ["נמר", "פיל"], "d": 1}, {"t": "איזו חיה היא הגבוהה ביותר ביבשה?", "r": "ג'ירפה", "w": ["פיל", "סוס"], "d": 1}, {"t": "איזה כוכב לכת קרוי על שם אל המלחמה הרומי ונקרא הכוכב האדום?", "r": "מאדים", "w": ["נוגה", "צדק"], "d": 1}, {"t": "מה צבע הדם של האדם?", "r": "אדום", "w": ["כחול", "ירוק"], "d": 1}, {"t": "כמה צלעות יש לריבוע?", "r": "4", "w": ["3", "5"], "d": 1}, {"t": "כמה ימים יש בשנה רגילה?", "r": "365", "w": ["360", "366"], "d": 1}, {"t": "באיזו מדינה נמצא מגדל אייפל?", "r": "צרפת", "w": ["איטליה", "ספרד"], "d": 1}, {"t": "מהו הנהר הראשי של ישראל?", "r": "הירדן", "w": ["הנילוס", "הליטני"], "d": 1}, {"t": "איזה בעל חיים מייצר דבש?", "r": "דבורה", "w": ["צרעה", "זבוב"], "d": 1}, {"t": "איזה איבר בגוף משאב דם?", "r": "הלב", "w": ["הכליה", "הריאה"], "d": 1}, {"t": "איזה צבע מתקבל מערבוב אדום ולבן?", "r": "ורוד", "w": ["סגול", "כתום"], "d": 1}, {"t": "מי כתב את 'הנסיך הקטן'?", "r": "אנטואן דה סנט-אכזופרי", "w": ["ז'ול ורן", "ויקטור הוגו"], "d": 1}, {"t": "איזו חיה היא הגדולה ביותר בעולם?", "r": "לווייתן כחול", "w": ["פיל אפריקאי", "כריש לבן"], "d": 1}, {"t": "איזה כלי נגינה יש לו מקשים שחורים ולבנים?", "r": "פסנתר", "w": ["גיטרה", "חליל"], "d": 1}, {"t": "באיזה חג מדליקים נרות במשך שמונה ימים?", "r": "חנוכה", "w": ["פורים", "סוכות"], "d": 1}, {"t": "מה הבירה של ארצות הברית?", "r": "וושינגטון", "w": ["ניו יורק", "לוס אנג'לס"], "d": 1}, {"t": "איזו מדינה נקראת 'ארץ השמש העולה'?", "r": "יפן", "w": ["סין", "תאילנד"], "d": 1}, {"t": "איזה בעל חיים נוהג לישון בחורף ('תרדמת חורף') והוא גדול וחום?", "r": "דוב", "w": ["זאב", "אריה"], "d": 1}, {"t": "איזה מין בעל חיים הוא דולפין?", "r": "יונק", "w": ["דג", "זוחל"], "d": 1}, {"t": "איזה פרי גדל על עץ הדקל ומקובל בראש השנה?", "r": "תמר", "w": ["תאנה", "רימון"], "d": 1}, {"t": "איזה אוקיינוס הוא הגדול ביותר?", "r": "השקט", "w": ["האטלנטי", "ההודי"], "d": 1}, {"t": "כמה שחקנים יש בקבוצת כדורגל על המגרש?", "r": "11", "w": ["9", "10"], "d": 1}, {"t": "איזה ספורט משחקים עם סל וכדור כתום?", "r": "כדורסל", "w": ["כדורעף", "כדוריד"], "d": 1}, {"t": "איזה צבע הוא הדגל של ישראל מלבד לבן?", "r": "כחול", "w": ["אדום", "ירוק"], "d": 1}, {"t": "מה מקור הצמר?", "r": "כבשה", "w": ["פרה", "עז"], "d": 1}, {"t": "איזה חלק בצמח סופג מים מהאדמה?", "r": "שורש", "w": ["עלה", "פרח"], "d": 1}, {"t": "באיזו שנה נחתו בני האדם לראשונה על הירח?", "r": "1969", "w": ["1965", "1972"], "d": 3}, {"t": "מי כתב את 'מלחמה ושלום'?", "r": "לב טולסטוי", "w": ["פיודור דוסטויבסקי", "אנטון צ'כוב"], "d": 3}, {"t": "מי צייר את 'הצעקה'?", "r": "אדוארד מונק", "w": ["וינסנט ואן גוך", "גוסטב קלימט"], "d": 3}, {"t": "מהו הסמל הכימי של זהב?", "r": "Au", "w": ["Ag", "Gd"], "d": 3}, {"t": "מי המציא את הטלפון (לפי הפטנט המפורסם)?", "r": "אלכסנדר גרהאם בל", "w": ["תומאס אדיסון", "ניקולה טסלה"], "d": 3}, {"t": "מי כתב את 'האודיסאה'?", "r": "הומרוס", "w": ["וירגיליוס", "סופוקלס"], "d": 3}, {"t": "באיזו שנה התחילה מלחמת העולם הראשונה?", "r": "1914", "w": ["1912", "1917"], "d": 3}, {"t": "באיזו שנה הוכרזה מדינת ישראל?", "r": "1948", "w": ["1947", "1949"], "d": 3}, {"t": "מי היה נשיא ארצות הברית בעת מלחמת האזרחים האמריקנית?", "r": "אברהם לינקולן", "w": ["ג'ורג' וושינגטון", "תיאודור רוזוולט"], "d": 3}, {"t": "איזה יסוד כימי הוא הנפוץ ביותר ביקום?", "r": "מימן", "w": ["חמצן", "הליום"], "d": 3}, {"t": "מי חיבר את 'ריקוד הברבורים' ('אגם הברבורים')?", "r": "צ'ייקובסקי", "w": ["מוצרט", "שופן"], "d": 3}, {"t": "מי חיבר את הסימפוניה התשיעית עם 'שיר ההודיה לשמחה'?", "r": "בטהובן", "w": ["מוצרט", "ברהמס"], "d": 3}, {"t": "מי ביים את הסרט 'מדובר ברשימת שינדלר'?", "r": "סטיבן ספילברג", "w": ["מרטין סקורסזה", "ג'יימס קמרון"], "d": 3}, {"t": "איזה סופר ישראלי זכה בפרס נובל לספרות ב-1966?", "r": "ש\"י עגנון", "w": ["עמוס עוז", "א\"ב יהושע"], "d": 3}, {"t": "איזו שנה נחתם הסכם השלום בין ישראל למצרים?", "r": "1979", "w": ["1977", "1982"], "d": 3}, {"t": "מהו הנהר הארוך ביותר באפריקה?", "r": "הנילוס", "w": ["הקונגו", "הניז'ר"], "d": 3}, {"t": "מהו האגם הגדול ביותר בעולם לפי שטח?", "r": "הים הכספי", "w": ["אגם סופיריור", "אגם ויקטוריה"], "d": 3}, {"t": "באיזה גוף שמימי נמצא 'ים השלווה' שליד נחיתת אפולו 11?", "r": "הירח", "w": ["מאדים", "אירופה"], "d": 3}, {"t": "מי גילה את האמריקות ב-1492 במסעו מטעם ספרד?", "r": "כריסטופר קולומבוס", "w": ["ואסקו דה גמה", "פרדיננד מגלן"], "d": 3}, {"t": "מי כתב את 'הרפתקאות אליס בארץ הפלאות'?", "r": "לואיס קרול", "w": ["צ'ארלס דיקנס", "רואלד דאל"], "d": 3}, {"t": "איזו עיר הייתה בירת האימפריה העות'מאנית?", "r": "איסטנבול", "w": ["אנקרה", "בגדד"], "d": 3}, {"t": "מהו הסמל הכימי של נתרן?", "r": "Na", "w": ["N", "Ne"], "d": 3}, {"t": "איזו מדינה זכתה במונדיאל 2014?", "r": "גרמניה", "w": ["ארגנטינה", "ברזיל"], "d": 3}, {"t": "איזו מדינה זכתה במונדיאל 2010?", "r": "ספרד", "w": ["הולנד", "גרמניה"], "d": 3}, {"t": "איזו מדינה זכתה במונדיאל 2018?", "r": "צרפת", "w": ["קרואטיה", "בלגיה"], "d": 3}, {"t": "מי הפילוסוף שאמר 'אני חושב משמע אני קיים'?", "r": "רנה דקארט", "w": ["עמנואל קאנט", "פלאטון"], "d": 3}, {"t": "איזה צייר צייר את 'הלילה הזרוע כוכבים'?", "r": "וינסנט ואן גוך", "w": ["קלוד מונה", "פבלו פיקאסו"], "d": 3}, {"t": "מי כתב את '1984'?", "r": "ג'ורג' אורוול", "w": ["אלדוס האקסלי", "ריי ברדבורי"], "d": 3}];
+function hash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36);}
+BANK.forEach(b=>{b.id=hash(b.t);});
+// ערך לטועה בכל שלב (מקור: ויקיפדיה העברית - 11 דרגות, 100 עד 5,000; שלב 4 = 750, שלב 9 = 3,000; שאר הדרגות משוערות)
+const LADDER=[100,250,500,750,1000,1500,2000,2500,3000,4000,5000];
+const MOB_SIZE=100, JACKPOT=1000000, CASHOUT_FROM=4; // כסף או נבחרת: אחרי שאלה 4 ואילך
+function levelValue(round){return LADDER[Math.min(round,LADDER.length)-1];}
+function tierFor(round){return round<=3?1:(round<=8?2:3);}
+function validateBank(bank){
+  const e=[],ids=new Set(),texts=new Set();
+  bank.forEach((b,i)=>{
+    const tag='#'+i+' '+(b.t||'');
+    if(!b.t||!/\?$/.test(b.t.trim()))e.push(tag+': השאלה חייבת להסתיים בסימן שאלה');
+    const opts=[b.r].concat(b.w||[]);
+    if(opts.length!==3||opts.some(o=>!o||!String(o).trim()))e.push(tag+': חייבות להיות 3 תשובות לא ריקות');
+    else if(new Set(opts.map(o=>String(o).trim())).size!==3)e.push(tag+': תשובות כפולות');
+    if(![1,2,3].includes(b.d))e.push(tag+': רמת קושי לא תקינה');
+    if(ids.has(b.id))e.push(tag+': מזהה כפול');ids.add(b.id);
+    if(texts.has(b.t))e.push(tag+': שאלה כפולה');texts.add(b.t);
+    if(opts.some(o=>String(o).length>40))e.push(tag+': תשובה ארוכה מדי');
+    if(b.t&&b.t.length>120)e.push(tag+': שאלה ארוכה מדי');
+  });
+  return e;
+}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const NAMES=['אבי','דנה','יוסי','מירי','רון','שירן','עמית','נועה','אלון','תמר','גיא','ליאת','משה','רינת','דוד','מאיה','איתי','הילה','ניר','סיגל','אורי','יעל','בועז','קרן','זיו','עדי','שלומי','טלי','עומר','לימור','אסף','רונית','חגי','מור','יובל','אפרת','רועי','שרון','אילן','גלית','תומר','מיכל','אריאל','ענת','ליאור','אורית','שחר','נטע','עידו','רחל'];
+const JOBS=['מורה','נהג מונית','רופאה','מהנדס','סטודנטית','עורך דין','טבח','חייל','מוזיקאי','אחות','מתכנת','חקלאי','עיתונאית','שוטר','מעצבת','איש מכירות','ספרנית','טייס','צלם','פיזיותרפיסט','גננת','מנהל חשבונות','בעל מסעדה','יועצת','נגר'];
+function newGame(o){
+  o=o||{};
+  const rng=o.rng||Math.random, bank=o.bank||BANK;
+  const seen=new Set(o.seen||[]);
+  const mob=[];
+  for(let i=0;i<MOB_SIZE;i++)mob.push({id:i,name:NAMES[Math.floor(rng()*NAMES.length)],job:JOBS[Math.floor(rng()*JOBS.length)],skill:0.6+rng()*0.37,alive:true});
+  const g={mob,seen,round:0,money:0,eliminated:0,status:'idle',q:null,used:{poll:false,ask:false,trust:false},recycled:false,log:[],bank,rng};
+  const alive=()=>mob.filter(m=>m.alive);
+  g.alive=alive;
+  g.aliveCount=()=>alive().length;
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  g.nextQuestion=function(){
+    if(g.status!=='idle'&&g.status!=='revealed')throw new Error('לא ניתן לבקש שאלה במצב '+g.status);
+    g.round++;
+    const tier=tierFor(g.round);
+    let pool=bank.filter(b=>!seen.has(b.id));
+    if(pool.length===0){seen.clear();g.recycled=true;pool=bank.slice();}
+    let cand=pool.filter(b=>b.d===tier);
+    if(!cand.length)cand=pool.filter(b=>Math.abs(b.d-tier)===1);
+    if(!cand.length)cand=pool;
+    const b=cand[Math.floor(rng()*cand.length)];
+    seen.add(b.id);
+    const order=shuffle([0,1,2]);
+    const all=[b.r,b.w[0],b.w[1]];
+    const options=order.map(i=>all[i]);
+    const correct=order.indexOf(0);
+    const wrongIdx=[0,1,2].filter(i=>i!==correct);
+    const popular=wrongIdx[Math.floor(rng()*2)];
+    const adj=b.d===1?0.1:(b.d===2?-0.05:-0.2);
+    const mobAnswers={};
+    mob.forEach(m=>{
+      if(!m.alive)return;
+      const p=Math.max(0.05,Math.min(0.97,m.skill+adj));
+      if(rng()<p)mobAnswers[m.id]=correct;
+      else mobAnswers[m.id]=rng()<0.6?popular:wrongIdx.find(i=>i!==popular);
+    });
+    g.q={id:b.id,text:b.t,options,correct,d:b.d,level:levelValue(g.round),mobAnswers,trusted:false,helpUsed:[]};
+    g.status='asking';
+    return g.q;
+  };
+  g.counts=function(){const c=[0,0,0];alive().forEach(m=>c[g.q.mobAnswers[m.id]]++);return c;};
+  g.membersWho=function(idx){return alive().filter(m=>g.q.mobAnswers[m.id]===idx);};
+  function need(){if(g.status!=='asking')throw new Error('אין שאלה פעילה');}
+  const LINES_OK=['זה נראה לי הכי הגיוני.','ראיתי את זה פעם, אני די בטוח.','אני זוכר את זה מהלימודים.','הרגשתי מיד שזו התשובה.'];
+  const LINES_BAD=['אני חושב שככה שמעתי בחדשות.','זה נשמע לי הכי מוכר.','אני סומך על האינסטינקט שלי.','כל החיים חשבתי ככה.'];
+  g.poll=function(idx){ // סקר את הנבחרת
+    need();if(g.used.poll)throw new Error('העזרה כבר נוצלה');if(![0,1,2].includes(idx))throw new Error('תשובה לא תקינה');
+    g.used.poll=true;g.q.helpUsed.push('poll');
+    const members=g.membersWho(idx);
+    return {idx,count:members.length,members:members.map(m=>m.id)};
+  };
+  g.explain=function(id){ // נימוק של חבר נבחרת שנבחר בסקר
+    need();const m=mob[id];if(!m||!m.alive)throw new Error('חבר נבחרת לא פעיל');
+    const a=g.q.mobAnswers[id],ok=a===g.q.correct,L=ok?LINES_OK:LINES_BAD;
+    return {id,name:m.name,job:m.job,answer:a,line:L[Math.floor(rng()*L.length)]};
+  };
+  function askCore(){
+    const a=alive(),right=a.filter(m=>g.q.mobAnswers[m.id]===g.q.correct),wrong=a.filter(m=>g.q.mobAnswers[m.id]!==g.q.correct);
+    const pick=arr=>arr[Math.floor(rng()*arr.length)];
+    if(right.length&&wrong.length){
+      const r=pick(right),w=pick(wrong);
+      const eliminatedOption=[0,1,2].find(i=>i!==g.q.correct&&i!==g.q.mobAnswers[w.id]);
+      return {members:[r.id,w.id].sort(()=>rng()-0.5),eliminatedOption,allSame:false,allWrong:false};
+    }
+    if(right.length){const r=pick(right);return {members:[r.id],eliminatedOption:null,allSame:true,allWrong:false};}
+    const w=pick(wrong);
+    return {members:[w.id],eliminatedOption:g.q.mobAnswers[w.id],allSame:false,allWrong:true};
+  }
+  g.ask=function(){ // שאל את הנבחרת
+    need();if(g.used.ask)throw new Error('העזרה כבר נוצלה');
+    g.used.ask=true;g.q.helpUsed.push('ask');
+    return askCore();
+  };
+  g.trust=function(){ // סמוך על הנבחרת
+    need();if(g.used.trust)throw new Error('העזרה כבר נוצלה');
+    g.used.trust=true;g.q.helpUsed.push('trust');
+    const c=g.counts(),mx=Math.max(...c),top=[0,1,2].filter(i=>c[i]===mx);
+    if(top.length===1){g.q.trusted=true;return {committed:top[0]};}
+    const res=askCore();res.tie=true;return res; // תיקו: פועל כמו "שאל את הנבחרת"
+  };
+  g.answer=function(idx){
+    need();if(![0,1,2].includes(idx))throw new Error('תשובה לא תקינה');
+    const q=g.q,correct=idx===q.correct;
+    const res={correct,picked:idx,correctIdx:q.correct,eliminated:[],gain:0,level:q.level};
+    if(correct){
+      alive().forEach(m=>{if(q.mobAnswers[m.id]!==q.correct){m.alive=false;res.eliminated.push(m.id);}});
+      res.gain=res.eliminated.length*q.level;
+      g.money+=res.gain;g.eliminated+=res.eliminated.length;
+      if(g.aliveCount()===0){g.money=JACKPOT;res.jackpot=true;g.status='won';}else g.status='revealed';
+    }else{
+      res.lost=g.money;g.lostMoney=g.money;g.money=0;g.status='lost';
+    }
+    res.mobLeft=g.aliveCount();res.money=g.money;
+    g.log.push({round:g.round,id:q.id,picked:idx,correct});
+    return res;
+  };
+  g.canCashOut=function(){return (g.status==='revealed'&&g.round>=CASHOUT_FROM);};
+  g.cashOut=function(){
+    if(!g.canCashOut())throw new Error('אפשר לפרוש רק בין שאלות, אחרי שאלה '+CASHOUT_FROM);
+    g.status='cashed';return g.money;
+  };
+  return g;
+}
+return {BANK,LADDER,MOB_SIZE,JACKPOT,CASHOUT_FROM,levelValue,tierFor,validateBank,newGame,mulberry32,hash};
+})();
+
+</script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const fmt=n=>'₪'+n.toLocaleString('en-US');
+const LET=['א','ב','ג'],COL=['#e0454b','#3a7be0','#2fb457'];
+const params=new URLSearchParams(location.search);
+const AUTO=params.get('auto'),SEED=params.get('seed');
+/* ---------- scale ---------- */
+function fit(){const s=Math.min(innerWidth/1280,innerHeight/720);$('#st').style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();
+/* ---------- audio (מוזיקה מקורית, מסונתזת) ---------- */
+const AUD_KEY='ov100_audio_v1';
+const AUD=(function(){let d={music:.7,sfx:.85,mute:false};try{Object.assign(d,JSON.parse(localStorage.getItem(AUD_KEY)||'{}'));}catch(e){}return d;})();
+function saveAud(){try{localStorage.setItem(AUD_KEY,JSON.stringify(AUD));}catch(e){}}
+const Snd=(function(){
+ let ac=null,master,musicGain,sfx,musicOn=false,step=0,timer=null,tension=0,bed=true;
+ const ROOTS=[110,87.31,98,82.41];
+ function applyVol(){if(!ac)return;master.gain.value=AUD.mute?0:1;musicGain.gain.value=AUD.music*.7;sfx.gain.value=AUD.sfx;}
+ function init(){if(ac)return;try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}master=ac.createGain();master.connect(ac.destination);musicGain=ac.createGain();musicGain.connect(master);sfx=ac.createGain();sfx.connect(master);applyVol();}
+ function tone(f,t,d,type,vol,dest,slide){if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(20,slide),t+d);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||.2,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(dest||sfx);o.start(t);o.stop(t+d+.05);}
+ function noise(t,d,vol,f0,f1,dest){if(!ac)return;const b=ac.createBuffer(1,Math.max(1,Math.floor(ac.sampleRate*d)),ac.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;const s=ac.createBufferSource();s.buffer=b;const fl=ac.createBiquadFilter();fl.type='bandpass';fl.frequency.setValueAtTime(f0,t);fl.frequency.exponentialRampToValueAtTime(f1,t+d);const g=ac.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(fl);fl.connect(g);g.connect(dest||sfx);s.start(t);}
+ function tick(){
+  if(!ac||!musicOn||AUD.mute)return;const t=ac.currentTime+.05,bar=Math.floor(step/16)%4,s=step%16,root=ROOTS[bar];
+  if(bed){
+   if(s%4===0||(tension>.5&&s%2===0))tone(root/2,t,.22,'sawtooth',.16,musicGain);
+   if(s===0)[1,1.2,1.5].forEach(m=>tone(root*2*m,t,1.6,'triangle',.05,musicGain));
+   if(s%2===1||tension>.3){const sc=[1,1.2,1.5,1.78,2,1.5,1.2,1.78],f=root*2*sc[(s+bar)%8];tone(f,t,.12,'square',.035+tension*.03,musicGain);}
+   if(s%8===4)noise(t,.12,.05+tension*.05,3000,800,musicGain);
+   if(tension>.7&&s%4===2)tone(55,t,.1,'sine',.25,musicGain,40);
+  }
+  step++;
+ }
+ function loop(){clearInterval(timer);const bpm=96+tension*40;timer=setInterval(tick,60000/bpm/4);}
+ const SC=[0,2,4,7,9,12,14,16,19,21,24];
+ return{
+  init,resume(){init();if(ac&&ac.state==='suspended')ac.resume();applyVol();},
+  apply:applyVol,
+  music(v){musicOn=v;if(v)loop();else clearInterval(timer);},
+  tension(x){tension=Math.max(0,Math.min(1,x));if(musicOn)loop();},
+  bed(v){bed=v;},
+  whoosh(){if(!ac)return;const t=ac.currentTime;noise(t,.7,.25,300,5000);tone(120,t,.7,'sawtooth',.12,null,900);},
+  hit(){if(!ac)return;const t=ac.currentTime;tone(70,t,.5,'sine',.5,null,35);noise(t,.25,.3,2000,200);},
+  lock(){if(!ac)return;const t=ac.currentTime;tone(220,t,.25,'square',.12);tone(330,t+.08,.3,'square',.12);},
+  roll(d){if(!ac)return;const t=ac.currentTime;for(let i=0;i<d*14;i++)tone(90+i*3,t+i*.07,.06,'triangle',.18+i*.004);},
+  right(){if(!ac)return;const t=ac.currentTime;[523,659,784,1047].forEach((f,i)=>{tone(f,t+i*.09,.7,'sawtooth',.13);tone(f*2,t+i*.09,.5,'triangle',.06);});noise(t,.5,.12,4000,9000);},
+  wrong(){if(!ac)return;const t=ac.currentTime;tone(220,t,1,'sawtooth',.28,null,55);tone(165,t+.15,1,'square',.18,null,40);noise(t,.6,.25,400,60);},
+  ting(k){ // "טינג" - פעמון הדחה מקורי, עולה בגובה
+   if(!ac)return;const t=ac.currentTime,f=698*Math.pow(1.05946,SC[k%SC.length]);
+   tone(f,t,.95,'sine',.22);tone(f*2.76,t,.5,'sine',.1);tone(f*5.4,t,.25,'sine',.05);tone(f*.5,t,.3,'triangle',.06);noise(t,.03,.12,6000,9000);},
+  pop(i){this.ting(i);},
+  boom(){if(!ac)return;const t=ac.currentTime;tone(60,t,.8,'sine',.55,null,28);noise(t,.5,.35,1500,100);},
+  cash(){if(!ac)return;const t=ac.currentTime;[784,988,1175,1568].forEach((f,i)=>{tone(f,t+i*.07,.5,'triangle',.14);tone(f*2,t+i*.07,.3,'sine',.05);});for(let i=0;i<10;i++)tone(2400+Math.random()*1200,t+.3+i*.04,.08,'sine',.05);},
+  tally(){if(!ac)return;const t=ac.currentTime;tone(1800,t,.04,'square',.04);},
+  fanfare(){if(!ac)return;const t=ac.currentTime,seq=[[523,0],[659,.15],[784,.3],[1047,.45],[784,.7],[1047,.85],[1319,1.05]];seq.forEach(([f,d])=>{tone(f,t+d,.6,'sawtooth',.14);tone(f/2,t+d,.6,'square',.07);});noise(t+1,1,.15,3000,9000);},
+  chirp(){if(!ac)return;const t=ac.currentTime;tone(880,t,.12,'sine',.12);tone(1320,t+.1,.15,'sine',.12);}
+ };
+})();
+
+/* ---------- avatars ---------- */
+const SK=['#f1c9a5','#e0ac82','#c68863','#8d5a3b','#5e3a24'],HR=['#1c1208','#3a2410','#6b4a1f','#a8782c','#c9c9c9','#111','#7a2a14'],SH=['#d33','#39d','#3b6','#fb2','#a4d','#eee','#f73','#2cc'];
+function avatar(r){
+ const P=a=>a[Math.floor(r()*a.length)],R=(a,b)=>a+r()*(b-a);
+ const female=r()<0.5, age=r()<.5?0:(r()<.6?1:2); // 0 young,1 mid,2 older
+ const tone=P([0,0,1,1,1,2,2,3,4]);
+ const skin=['url(#sk0)','url(#sk1)','url(#sk2)','url(#sk3)','url(#sk4)'][tone];
+ const skinDark=['#c99a78','#b5805c','#9a6a46','#6e432a','#4a2b1a'][tone];
+ const lipC=female?P(['#c4505a','#b23e4c','#d0707a','#a8505a']):['#b7766a','#a4604f','#8a5040','#6a3a30','#553025'][tone];
+ let hc;
+ if(age===2)hc=P(['#d8d8d8','#bdbdbd','#9a9a9a','#e6e6e6','#8c8c8c']);
+ else if(age===1)hc=P(['#2b1d10','#3d2814','#5a3b1c','#222','#6e4a22','#8a8a8a']);
+ else hc=P(['#14100a','#2b1d10','#3d2814','#5a3b1c','#8a5a2a','#c79a4a','#111','#7a2a14']);
+ const hcd=hc;
+ const shirt=P(['#c0392b','#2c6fb3','#2e8b57','#e0a526','#7b4fa3','#e8e8e8','#e87b2c','#1f9aa8','#3a3f4b','#b04a7a','#7a8a99','#5a7a3a']);
+ const blazer=P(['#23283a','#3a3a3a','#2b3d5a','#4a2f2f','#1d2a24','#5a5a64']);
+ const eye=P(['#3a2412','#2a1a0c','#4a3a1a','#2f5d3a','#3a6a9a','#1a1a1a']);
+ let o='';
+ const tilt=R(-2.5,2.5);
+ o+=`<svg viewBox="0 0 60 68" preserveAspectRatio="xMidYMid slice"><g transform="rotate(${tilt.toFixed(1)} 30 40) translate(${R(-1,1).toFixed(1)} ${R(-.5,1).toFixed(1)})">`;
+ const hijab=female&&r()<.09, kippah=!female&&r()<.1;
+ let style;
+ if(female)style=P([5,5,6,6,7,8,9]);else style=age===2&&r()<.5?3:P([0,0,1,1,2,4]);
+ if(hijab){const sc=P(['#2d3a5a','#7a2f4a','#2f6a5a','#d9d0c0','#5a2f6a','#333']);o+=`<path d="M12 36 C10 12 20 5 30 5 C40 5 50 12 48 36 C48 48 54 56 58 68 L2 68 C6 56 12 48 12 36Z" fill="${sc}"/>`;}
+ else if(female){ // back hair
+  if(style===5)o+=`<path d="M16 22 C14 8 24 4 30 4 C36 4 46 8 44 22 L46 56 L38 54 L38 30 L22 30 L22 54 L14 56Z" fill="${hc}"/>`;
+  if(style===6)o+=`<path d="M16 24 C14 8 24 4 30 4 C36 4 46 8 44 24 L45 42 C40 46 20 46 15 42Z" fill="${hc}"/>`;
+  if(style===8){for(let i=0;i<9;i++){o+=`<circle cx="${(14+i*4.2).toFixed(1)}" cy="${(i%2?20:14)+Math.abs(4-i)*2.5}" r="5.5" fill="${hc}"/>`;}o+=`<rect x="14" y="26" width="32" height="24" rx="8" fill="${hc}"/>`;}
+  if(style===7)o+=`<circle cx="30" cy="4.5" r="5.5" fill="${hc}"/>`;
+ }
+ // torso
+ const cloth=female?P([1,4,4,0,2,3]):P([0,1,1,2,2,3]);
+ const tc=cloth===2?blazer:shirt;
+ o+=`<path d="M3 68 C4 56 16 51 30 51 C44 51 56 56 57 68Z" fill="${tc}"/><path d="M3 68 C4 56 16 51 30 51 C44 51 56 56 57 68Z" fill="url(#shade)"/>`;
+ // neck
+ o+=`<path d="M24.5 38 L24 53 C27 56 33 56 36 53 L35.5 38Z" fill="${skin}"/><path d="M24.5 44 C28 49 32 49 35.5 44 L35.5 40 L24.5 40Z" fill="#000" opacity=".16"/>`;
+ // clothing details
+ if(cloth===0)o+=`<path d="M23 51.5 C26 57 34 57 37 51.5 C34 54 26 54 23 51.5Z" fill="${skin}"/><path d="M23 51.5 C26 58 34 58 37 51.5" stroke="#000" stroke-opacity=".25" fill="none" stroke-width="1"/>`;
+ if(cloth===1){const cl=tc==='#e8e8e8'?'#f6f6f6':'#fff';o+=`<path d="M30 52 L22 50 L25 59Z M30 52 L38 50 L35 59Z" fill="${cl}" stroke="#000" stroke-opacity=".25" stroke-width=".6"/><path d="M30 58 L30 68" stroke="#000" stroke-opacity=".25"/>`;}
+ if(cloth===2){o+=`<path d="M30 52 L23 51 L30 68 L37 51Z" fill="${female?skin:'#f4f4f4'}"/><path d="M23 51 L30 68 L19 68Z M37 51 L30 68 L41 68Z" fill="${blazer}" stroke="#000" stroke-opacity=".35" stroke-width=".6"/>`;if(!female&&r()<.6)o+=`<path d="M29 53 L31 53 L32 66 L30 68 L28 66Z" fill="${P(['#a3202a','#1f4f9a','#6a2f8a','#2a7a4a'])}"/>`;}
+ if(cloth===3)o+=`<path d="M22 50 C22 58 38 58 38 50 C38 54 22 54 22 50Z" fill="#000" opacity=".25"/><path d="M26 56 L26 64 M34 56 L34 64" stroke="#fff" stroke-opacity=".7" stroke-width=".9"/>`;
+ if(cloth===4)o+=`<path d="M24 51 L30 62 L36 51 C33 53 27 53 24 51Z" fill="${skin}"/><path d="M24 51 L30 62 L36 51" stroke="#000" stroke-opacity=".25" fill="none" stroke-width=".7"/>`;
+ // ears
+ if(!hijab)o+=`<ellipse cx="17.6" cy="27.5" rx="2.4" ry="3.6" fill="${skin}"/><ellipse cx="42.4" cy="27.5" rx="2.4" ry="3.6" fill="${skin}"/>`;
+ // face
+ const jw=R(6,9.5);
+ o+=`<path d="M18 25 C18 13 24 8.5 30 8.5 C36 8.5 42 13 42 25 C42 35 ${30+jw} 44 30 46 C${30-jw} 44 18 35 18 25Z" fill="${skin}"/>`;
+ o+=`<path d="M18 25 C18 13 24 8.5 30 8.5 C36 8.5 42 13 42 25 C42 35 ${30+jw} 44 30 46 C${30-jw} 44 18 35 18 25Z" fill="url(#faceL)"/>`;
+ if(female)o+=`<ellipse cx="22.5" cy="34" rx="3.2" ry="2" fill="#e0607a" opacity=".16"/><ellipse cx="37.5" cy="34" rx="3.2" ry="2" fill="#e0607a" opacity=".16"/>`;
+ // front hair
+ if(!hijab){
+  if(!female){
+   if(style===0)o+=`<path d="M18 24 C16.5 11 23 6 30 6 C37 6 43.5 11 42 24 C40.5 17 36 14.5 30 14.5 C24 14.5 19.5 17 18 24Z" fill="${hc}"/>`;
+   if(style===1)o+=`<path d="M17.5 25 C16 10 24 5.5 31 6 C38 6 44 11 42.5 25 C41.5 18 38 14 33 13.5 C27 14 22 12 19.5 18Z" fill="${hc}"/><path d="M26 7 C31 8 36 10 40 14" stroke="#fff" stroke-opacity=".22" fill="none" stroke-width="1.2"/>`;
+   if(style===2)o+=`<path d="M18.5 22 C18 12 24 8 30 8 C36 8 42 12 41.5 22 C39 15 35 13 30 13 C25 13 21 15 18.5 22Z" fill="${hc}" opacity=".7"/>`;
+   if(style===3)o+=`<path d="M17.5 24 C17 20 17.5 17 19 15 L19 24Z M42.5 24 C43 20 42.5 17 41 15 L41 24Z" fill="${hc}"/>`;
+   if(style===4){for(let i=0;i<7;i++)o+=`<circle cx="${(19+i*3.7).toFixed(1)}" cy="${(11+Math.abs(3-i)*1.4).toFixed(1)}" r="4.2" fill="${hc}"/>`;o+=`<path d="M18 22 C17 16 21 13 30 13 C39 13 43 16 42 22 C39 17 35 15 30 15 C25 15 21 17 18 22Z" fill="${hc}"/>`;}
+   if(kippah)o+=`<ellipse cx="30" cy="9.5" rx="7.5" ry="3.6" fill="${P(['#1a1a2a','#e8e8e8','#2a4a8a','#7a2a2a'])}" stroke="#000" stroke-opacity=".3" stroke-width=".5"/>`;
+  }else{
+   if(style===5)o+=`<path d="M18 26 C15.5 9 24 5 30 5 C36 5 44.5 9 42 26 C41 18 36 11 31 11 C25 11 20 17 18 26Z" fill="${hc}"/>`;
+   if(style===6)o+=`<path d="M17.5 27 C15 9 24 5 30 5 C36 5 45 9 42.5 27 C40.5 19 35 12 30 12 C26 15 20 19 17.5 27Z" fill="${hc}"/>`;
+   if(style===7)o+=`<path d="M18 24 C16 10 24 6 30 6 C36 6 44 10 42 24 C40 17 36 13 30 13 C24 13 20 17 18 24Z" fill="${hc}"/>`;
+   if(style===8)o+=`<path d="M18 24 C17 14 23 9 30 9 C37 9 43 14 42 24 C40 17 36 13.5 30 13.5 C24 13.5 20 17 18 24Z" fill="${hc}"/>`;
+   if(style===9)o+=`<path d="M18 24 C16 9 24 5 30 5 C36 5 44 9 42 24 C40 17 36 12 30 12 C24 12 20 17 18 24Z" fill="${hc}"/>`;
+  }
+ }else o+=`<path d="M17.5 24 C16 11 23 6 30 6 C37 6 44 11 42.5 24 C40 17 36 13.5 30 13.5 C24 13.5 20 17 17.5 24Z" fill="${P(['#2d3a5a','#7a2f4a','#2f6a5a','#d9d0c0','#5a2f6a','#333'])}" opacity=".0"/>`;
+ // brows
+ const bh=age===2?'#aaa':hc,bt=female?1.1:1.7,by=female?22.2:22.8;
+ o+=`<path d="M21.5 ${by+.8} Q24.5 ${by-1.2} 28 ${by+.3}" stroke="${bh}" stroke-width="${bt}" fill="none" stroke-linecap="round"/><path d="M32 ${by+.3} Q35.5 ${by-1.2} 38.5 ${by+.8}" stroke="${bh}" stroke-width="${bt}" fill="none" stroke-linecap="round"/>`;
+ // eyes
+ const ey=26.8,ew=female?3.3:3;
+ [24.5,35.5].forEach(x=>{o+=`<ellipse cx="${x}" cy="${ey}" rx="${ew}" ry="${female?1.9:1.7}" fill="#fff"/><circle cx="${x}" cy="${ey}" r="1.55" fill="${eye}"/><circle cx="${x}" cy="${ey}" r=".7" fill="#000"/><circle cx="${x+.5}" cy="${ey-.5}" r=".4" fill="#fff"/><path d="M${x-ew-.2} ${ey} Q${x} ${ey-2.6} ${x+ew+.2} ${ey}" stroke="#2a1a10" stroke-opacity=".75" fill="none" stroke-width="${female?.9:.7}"/><path d="M${x-ew+.4} ${ey+1.7} Q${x} ${ey+2.4} ${x+ew-.4} ${ey+1.7}" stroke="${skinDark}" stroke-opacity=".6" fill="none" stroke-width=".5"/>`;});
+ // glasses
+ if(r()<.22){const gc=P(['#222','#6a4a2a','#8a8a96','#a02a3a']);o+=`<g fill="none" stroke="${gc}" stroke-width=".9"><rect x="19.8" y="23.8" width="9.4" height="6.2" rx="2.4"/><rect x="30.8" y="23.8" width="9.4" height="6.2" rx="2.4"/><path d="M29.2 26 Q30 25.2 30.8 26"/></g>`;}
+ // nose
+ o+=`<path d="M30 27 C29.4 30 28.4 33 28.2 34.2 Q30 36.4 31.8 34.2 C31.6 33 30.6 30 30 27" fill="none" stroke="${skinDark}" stroke-opacity=".7" stroke-width=".9" stroke-linecap="round"/><ellipse cx="28.7" cy="35" rx=".9" ry=".5" fill="#000" opacity=".25"/><ellipse cx="31.3" cy="35" rx=".9" ry=".5" fill="#000" opacity=".25"/>`;
+ // beard / stubble
+ let beard=0;if(!female&&age>=0)beard=r()<.3?2:(r()<.3?1:0);
+ if(beard===2)o+=`<path d="M18.2 28 C18 40 24 47.5 30 47.5 C36 47.5 42 40 41.8 28 C40 35 36 37 30 37 C24 37 20 35 18.2 28Z" fill="${age===2?'#bbb':hc}" opacity=".92"/><path d="M25 38.4 Q30 36.5 35 38.4 Q30 39.6 25 38.4Z" fill="${age===2?'#bbb':hc}"/>`;
+ if(beard===1)o+=`<path d="M18.2 29 C18 40 24 46.5 30 46.5 C36 46.5 42 40 41.8 29 C40 35 36 37 30 37 C24 37 20 35 18.2 29Z" fill="#000" opacity=".22"/>`;
+ // mouth
+ const sm=R(.5,3.2),teeth=r()<.5;
+ o+=`<path d="M25.2 40.2 Q30 ${39+sm*.1} 34.8 40.2 Q30 ${42+sm} 25.2 40.2Z" fill="${teeth?'#fff':lipC}"/>`;
+ o+=`<path d="M25.2 40.2 Q27.5 38.9 30 39.4 Q32.5 38.9 34.8 40.2 Q30 ${40.8} 25.2 40.2Z" fill="${lipC}"/><path d="M25.8 40.6 Q30 ${41.9+sm*.9} 34.2 40.6" stroke="${lipC}" stroke-width="1.1" fill="none" ${teeth?'':'opacity="0"'}/>`;
+ if(!teeth)o+=`<path d="M25.2 40.2 Q30 ${43+sm*.4} 34.8 40.2 Q30 ${41.2} 25.2 40.2Z" fill="${lipC}" opacity=".9"/>`;
+ // wrinkles
+ if(age===2)o+=`<path d="M22 17 Q30 15.6 38 17 M22.6 19 Q30 17.8 37.4 19" stroke="#000" stroke-opacity=".16" fill="none" stroke-width=".6"/><path d="M20.5 26 l-1.8 1 M20.4 28 l-1.8 .2 M39.5 26 l1.8 1 M39.6 28 l1.8 .2 M24.6 36.6 Q23.6 40 25 42.5 M35.4 36.6 Q36.4 40 35 42.5" stroke="#000" stroke-opacity=".2" fill="none" stroke-width=".6"/>`;
+ else if(age===1)o+=`<path d="M24.6 36.8 Q23.8 39.5 25 41.4 M35.4 36.8 Q36.2 39.5 35 41.4" stroke="#000" stroke-opacity=".12" fill="none" stroke-width=".6"/>`;
+ if(female&&r()<.45)o+=`<circle cx="17.5" cy="31" r="1" fill="${P(['#f5d36a','#d8d8e8','#e08a9a'])}"/><circle cx="42.5" cy="31" r="1" fill="#f5d36a"/>`;
+ o+='</g></svg>';
+ return o;
+}
+
+/* ---------- state ---------- */
+let G=null,boothEls=[],busy=false,epoch=0;
+const SEEN_KEY='ov100_seen_v1';
+function loadSeen(){try{return JSON.parse(localStorage.getItem(SEEN_KEY)||'[]');}catch(e){return [];}}
+function saveSeen(){try{localStorage.setItem(SEEN_KEY,JSON.stringify(Array.from(G.seen)));}catch(e){}}
+function buildWall(){
+ const w=$('#wall');w.innerHTML='';boothEls=[];const r=SEED?Core.mulberry32(+SEED+7):Math.random;let id=0;
+ [12,15,17,18,19,19].forEach(n=>{const row=document.createElement('div');row.className='row';for(let i=0;i<n;i++){const b=document.createElement('div');b.className='b';b.innerHTML=avatar(r)+'<span class="l"></span>';b.dataset.id=id;b.addEventListener('click',()=>onBooth(+b.dataset.id));boothEls[id++]=b;row.appendChild(b);}w.appendChild(row);});
+}
+function buildLadder(){
+ const L=$('#ladder');L.innerHTML='';
+ for(let i=Core.LADDER.length;i>=1;i--){const d=document.createElement('div');d.className='lv';d.id='lv'+i;d.innerHTML='<span>'+fmt(Core.LADDER[i-1])+'</span><i>'+(i===Core.LADDER.length?'שאלה '+i+'+':'שאלה '+i)+'</i>';L.appendChild(d);}
+ const c=document.createElement('div');c.className='cap';c.textContent='שווי לכל טועה בנבחרת';L.appendChild(c);
+}
+function setLadder(round){for(let i=1;i<=Core.LADDER.length;i++){const e=$('#lv'+i);e.classList.toggle('cur',i===Math.min(round,Core.LADDER.length));e.classList.toggle('done',i<round&&round<=Core.LADDER.length);}}
+function hud(){$('#left').textContent='נותרו: '+G.aliveCount();$('#score').textContent='קופה: '+fmt(G.money);Snd.tension(1-G.aliveCount()/100);}
+function msg(t){$('#msg').textContent=t;}
+function btns(list){const b=$('#bot');b.innerHTML='';list.forEach(([cls,txt,fn])=>{const e=document.createElement('button');e.className='btn '+cls;e.textContent=txt;e.onclick=()=>{b.innerHTML='';fn();};b.appendChild(e);});}
+function flash(){const f=$('#flash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go');clearTimeout(flash.t);flash.t=setTimeout(()=>f.classList.remove('go'),650);}
+function shake(){const s=$('#st');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');}
+function helpsRender(){['poll','ask','trust'].forEach(k=>{const el=$('#h'+k[0].toUpperCase()+k.slice(1));el.disabled=G.used[k]||G.status!=='asking'||!canAct;});}
+let canAct=false,pickMode=null;
+/* ---------- game flow ---------- */
+function newGame(){
+ epoch++;G=Core.newGame({seen:loadSeen(),rng:SEED?Core.mulberry32(+SEED):Math.random});
+ if(SEED)G.mob.forEach(()=>0);
+ buildWall();buildLadder();hud();setLadder(1);$('#end').classList.add('hide');
+ $('#qbar').className='';$('#qbar').textContent='';$('#ans').innerHTML='';$('#bot').innerHTML='';msg('');
+ boothEls.forEach(b=>{b.className='b';b.querySelector('.l').className='l';});
+ Snd.music(true);Snd.bed(true);
+ setTimeout(()=>askNext(),400);
+}
+async function askNext(){
+ const my=epoch;busy=true;canAct=false;
+ const q=G.nextQuestion();saveSeen();setLadder(G.round);hud();
+ boothEls.forEach(b=>{b.classList.remove('show','hot','lock');});
+ $('#ans').innerHTML='';
+ msg('שאלה '+G.round+' - '+fmt(q.level)+' על כל טועה בנבחרת');
+ Snd.whoosh();const qb=$('#qbar');qb.className='';void qb.offsetWidth;qb.textContent=q.text;qb.className='in';
+ await sleep(900);if(my!==epoch)return;
+ const ans=$('#ans');
+ q.options.forEach((o,i)=>{const a=document.createElement('div');a.className='a';a.id='a'+i;a.innerHTML='<span class="k" style="background:'+COL[i]+'">'+LET[i]+'</span>'+o+'<span class="tag"></span>';a.onclick=()=>onAnswer(i);ans.appendChild(a);setTimeout(()=>{a.classList.add('in');Snd.chirp();},i*300);});
+ await sleep(1100);if(my!==epoch)return;
+ msg('הנבחרת מצביעה...');
+ const alive=G.alive();Snd.roll(2);
+ for(let i=0;i<alive.length;i++){const b=boothEls[alive[i].id];setTimeout(()=>{b.classList.add('lock');},Math.random()*1800);}
+ await sleep(2100);if(my!==epoch)return;
+ Snd.lock();msg('הנבחרת נעלה תשובות. עכשיו תורך - בחר/י תשובה');
+ canAct=true;busy=false;helpsRender();
+ if(G.canCashOut)G.cashAvail=false;
+ $('#ans').querySelectorAll('.a').forEach(a=>a.classList.add('can'));
+ if(AUTO)autoStep();
+}
+function onBooth(id){if(pickMode&&pickMode.members.includes(id)){const e=G.explain(id);const el=boothEls[id];showBubble(el,e.name+' ('+e.job+')',LET[e.answer]+': '+e.line);pickMode.members.forEach(m=>boothEls[m].classList.remove('hot'));pickMode=null;msg('בחר/י תשובה');}}
+function showBubble(el,title,text,persist){document.querySelectorAll('.bubble').forEach(b=>b.remove());const r=el.getBoundingClientRect(),sr=$('#st').getBoundingClientRect(),sc=sr.width/1280;let x=(r.left-sr.left)/sc-100,y=(r.top-sr.top)/sc+36;x=Math.max(205,Math.min(x,640));const b=document.createElement('div');b.className='bubble';b.style.left=x+'px';b.style.top=y+'px';b.innerHTML=title+'<small>'+text+'</small>';$('#st').appendChild(b);if(!persist)setTimeout(()=>b.remove(),7000);}
+function clearBubbles(){document.querySelectorAll('.bubble').forEach(b=>b.remove());}
+$('#hPoll').onclick=()=>{if(!canAct||G.used.poll)return;msg('סקר: על איזו תשובה תרצה לבדוק את הנבחרת?');pickMode={poll:true};$('#ans').querySelectorAll('.a').forEach((a,i)=>{a.onclick=()=>{if(!pickMode||!pickMode.poll)return onAnswer(i);const p=G.poll(i);Snd.chirp();a.querySelector('.tag').textContent=p.count+' מהנבחרת בחרו כאן';$('#ans').querySelectorAll('.a').forEach((x,j)=>x.onclick=()=>onAnswer(j));pickMode={members:p.members};p.members.forEach(m=>boothEls[m].classList.add('hot'));msg(p.count?'לחץ/י על חבר נבחרת מוסמן כדי לשמוע את הנימוק שלו':'אף אחד בנבחרת לא בחר בתשובה הזו');if(!p.count)pickMode=null;helpsRender();};});};
+$('#hAsk').onclick=()=>{if(!canAct||G.used.ask)return;const r=G.ask();Snd.chirp();showAsk(r);helpsRender();};
+$('#hTrust').onclick=()=>{if(!canAct||G.used.trust)return;const r=G.trust();Snd.chirp();helpsRender();if(r.tie){msg('תיקו בנבחרת - כמו "שאל את הנבחרת"');showAsk(r);}else{msg('סומכים על הנבחרת: תשובה '+LET[r.committed]);canAct=false;setTimeout(()=>onAnswer(r.committed,true),900);}};
+function showAsk(r){
+ clearBubbles();let i=0;
+ r.members.forEach(id=>{const e=G.explain(id),b=boothEls[id];b.classList.add('hot');setTimeout(()=>b.classList.remove('hot'),7000);setTimeout(()=>{showBubbleStack(b,e,i++);},0);});
+ if(r.eliminatedOption!==null){const a=$('#a'+r.eliminatedOption);a.classList.add('dead');}
+ msg(r.allSame?'כל הנבחרת בחרה באותה תשובה':(r.allWrong?'כל הנבחרת טעתה! אחת התשובות נפסלה':'אחת התשובות השגויות נפסלה'));
+}
+function showBubbleStack(el,e,i){const r=el.getBoundingClientRect(),sr=$('#st').getBoundingClientRect(),sc=sr.width/1280;let x=205+i*320;const b=document.createElement('div');b.className='bubble';b.style.left=x+'px';b.style.top='300px';b.innerHTML=e.name+' ('+e.job+')<small>'+LET[e.answer]+': '+e.line+'</small>';$('#st').appendChild(b);setTimeout(()=>b.remove(),9000);}
+async function onAnswer(i,trusted){
+ if(!canAct&&!trusted)return;if(G.status!=='asking')return;canAct=false;pickMode=null;helpsRender();clearBubbles();
+ const my=epoch;boothEls.forEach(b=>b.classList.remove('hot'));
+ const q=G.q;$('#ans').querySelectorAll('.a').forEach(a=>a.classList.remove('can'));$('#a'+i).classList.add('sel');
+ Snd.hit();Snd.bed(false);msg('נעלת תשובה... ');Snd.roll(2.4);await sleep(2600);if(my!==epoch)return;
+ const res=G.answer(i);
+ $('#a'+i).classList.remove('sel');$('#a'+res.correctIdx).classList.add('right');
+ if(!res.correct){
+  $('#a'+i).classList.add('wrong');Snd.wrong();shake();$('#red').style.opacity=1;msg('טעית! התשובה הנכונה: '+q.options[q.correct]);
+  showMobLetters(q,true);await sleep(2600);if(my!==epoch)return;$('#red').style.opacity=0;return endScreen('lost',res);
+ }
+ Snd.right();flash();msg('נכון מאוד!');await sleep(1300);if(my!==epoch)return;
+ showMobLetters(q,false);msg('הנבחרת חושפת תשובות...');await sleep(1800);if(my!==epoch)return;
+ const el=res.eliminated;
+ await eliminationScene(q,res,el,my);if(my!==epoch)return;
+ Snd.bed(true);hud();
+ if(res.jackpot){Snd.boom();return endScreen('won',res);}
+ msg(el.length+' הודחו, '+fmt(res.gain)+' נוספו לקופה. נותרו '+G.aliveCount());
+ await sleep(800);
+ const opts=[['go','ממשיכים לשאלה הבאה',()=>askNext()]];
+ if(G.canCashOut())opts.push(['cash','כסף או נבחרת: לוקחים '+fmt(G.money),()=>{G.cashOut();endScreen('cashed',res);}]);
+ else msg('נותרו '+G.aliveCount()+' בנבחרת. עוד '+(Core.CASHOUT_FROM-G.round)+' שאלות עד שאפשר לפרוש עם הכסף');
+ btns(opts);
+ if(AUTO)autoNext();
+}
+
+/* ---------- elimination scene ---------- */
+const fx2=$('#fx2').getContext('2d');let sparks=[],sparkRun=false;
+function sparkLoop(){if(sparkRun)return;sparkRun=true;(function f(){fx2.clearRect(0,0,1280,720);sparks=sparks.filter(p=>p.l>0);sparks.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.12;p.l--;fx2.globalAlpha=Math.max(0,p.l/p.m);fx2.fillStyle=p.c;fx2.beginPath();fx2.arc(p.x,p.y,p.r,0,7);fx2.fill();if(p.ring){fx2.strokeStyle=p.c;fx2.lineWidth=3;fx2.beginPath();fx2.arc(p.x,p.y,(p.m-p.l)*3,0,7);fx2.stroke();}});fx2.globalAlpha=1;if(sparks.length||document.getElementById('st').classList.contains('elim'))requestAnimationFrame(f);else{sparkRun=false;fx2.clearRect(0,0,1280,720);}})();}
+function burst(el,n,col){const r=el.getBoundingClientRect(),sr=$('#st').getBoundingClientRect(),sc=sr.width/1280,x=(r.left+r.width/2-sr.left)/sc,y=(r.top+r.height/2-sr.top)/sc;sparks.push({x,y,vx:0,vy:0,r:0,l:16,m:16,c:col,ring:1});for(let i=0;i<n;i++){const a=Math.random()*6.28,v=1.5+Math.random()*4;sparks.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,r:1.5+Math.random()*2.5,l:30+Math.random()*25,m:55,c:[col,'#fff','#ffd23f'][i%3]});}sparkLoop();}
+async function eliminationScene(q,res,el,my){
+ const st=$('#st'),alive=G.mob.map((m,i)=>i).filter(i=>boothEls[i]&&!boothEls[i].classList.contains('gone')&&!boothEls[i].classList.contains('out'));
+ const elSet=new Set(el);const before=100-G.eliminated+el.length; // alive before this round
+ $('#eCount').textContent='0';$('#eGain').textContent='₪0';$('#eTotal').classList.remove('on');
+ $('#remNum').textContent=before;$('#remBox').classList.add('on');
+ st.classList.add('elim');sparkLoop();Snd.whoosh();msg('');
+ await sleep(1200);if(my!==epoch)return;
+ $('#elimBar').classList.add('on');
+ // phase 1: red / blue LED panels
+ boothEls.forEach((b,id)=>{if(b.classList.contains('gone'))return;const a=q.mobAnswers[id];if(a===undefined)return;const w=a!==q.correct;setTimeout(()=>{b.classList.add(w?'pw':'pr','show');},Math.random()*900);});
+ Snd.roll(1.4);await sleep(1900);if(my!==epoch)return;
+ // phase 2: staggered eliminations
+ Snd.boom();flash();shake();
+ let money=G.money-res.gain,gain=0;const step=Math.max(45,Math.min(190,4200/Math.max(1,el.length)));
+ const order=el.slice().sort((a,b)=>boothEls[a].offsetTop-boothEls[b].offsetTop||0);
+ for(let k=0;k<order.length;k++){
+  if(my!==epoch)return;const id=order[k],b=boothEls[id];
+  b.classList.add('out');burst(b,9,'#ff4a4a');Snd.ting(k%11);
+  gain+=res.level;money+=res.level;
+  $('#eCount').textContent=k+1;$('#eGain').textContent='+'+fmt(gain);$('#remNum').textContent=before-k-1;$('#score').textContent='קופה: '+fmt(money);$('#left').textContent='נותרו: '+(before-k-1);
+  if((k+1)%10===0){shake();Snd.hit();}
+  setTimeout(()=>b.classList.add('gone'),700);
+  await sleep(step);
+ }
+ await sleep(900);if(my!==epoch)return;
+ $('#eTotalV').textContent=fmt(G.money);$('#eTotal').classList.add('on');Snd.cash();
+ if(el.length)for(let i=0;i<5;i++)setTimeout(()=>{sparks.push(...[...Array(14)].map(()=>({x:300+Math.random()*680,y:560,vx:(Math.random()-.5)*3,vy:-3-Math.random()*4,r:2+Math.random()*2,l:60,m:60,c:'#ffd23f'})));},i*120);
+ await sleep(2600);if(my!==epoch)return;
+ st.classList.remove('elim');$('#elimBar').classList.remove('on');$('#remBox').classList.remove('on');
+ boothEls.forEach(b=>b.classList.remove('pr','pw','show'));
+ await sleep(900);
+}
+function showMobLetters(q,dim){boothEls.forEach((b,id)=>{if(!G.mob[id].alive&&!dim&&q.mobAnswers[id]===undefined)return;const a=q.mobAnswers[id];if(a===undefined)return;const l=b.querySelector('.l');l.textContent=LET[a];l.style.background=COL[a];b.classList.add('show');});}
+function confetti(n){const c=$('#fx'),x=c.getContext('2d'),P=[];for(let i=0;i<n;i++)P.push({x:Math.random()*1280,y:-20-Math.random()*400,vx:Math.random()*2-1,vy:2+Math.random()*4,r:4+Math.random()*6,c:['#ffd23f','#ff4da6','#4dd2ff','#6bff8a','#fff'][i%5],a:Math.random()*6});let t=0;(function f(){x.clearRect(0,0,1280,720);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.a+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r,-p.r/2,p.r*2,p.r);x.restore();});if(++t<420)requestAnimationFrame(f);else x.clearRect(0,0,1280,720);})();}
+function endScreen(kind,res){
+ const e=$('#end');Snd.music(false);let h='';
+ if(kind==='won'){Snd.fanfare();confetti(300);h='<div class="logo" style="font-size:90px">🏆</div><h2>הדחת את כל המאה!</h2><div class="big">'+fmt(Core.JACKPOT)+'</div><p>מיליון שקלים. אגדה.</p>';}
+ else if(kind==='cashed'){Snd.fanfare();confetti(160);h='<h2>לקחת את הכסף</h2><div class="big">'+fmt(G.money)+'</div><p>הדחת '+G.eliminated+' מהנבחרת ופרשת בזמן. נבחרת: '+G.aliveCount()+' נותרו.</p>';}
+ else{h='<h2>הנבחרת ניצחה</h2><div class="big" style="color:#ff7b7b;text-shadow:0 0 28px #f33">₪0</div><p>טעית בשאלה '+G.round+'. '+(res.lost?'איבדת '+fmt(res.lost)+' שהיו בקופה. ':'')+'הדחת '+G.eliminated+' מהנבחרת, נותרו '+G.aliveCount()+'.</p>';}
+ e.innerHTML=h+'<button class="btn go" id="again">משחק חדש (שאלות אחרות)</button>';e.classList.remove('hide');$('#again').onclick=()=>{$('#fx').getContext('2d').clearRect(0,0,1280,720);newGame();};
+}
+
+/* ---------- menu & audio settings ---------- */
+function showPanel(id){$('#menu').classList.toggle('sub',id!=='mMain');document.querySelectorAll('.mpanel').forEach(p=>p.classList.toggle('hide',p.id!==id));}
+function openMenu(){epoch++;busy=false;canAct=false;Snd.music(false);clearBubbles();$('#st').classList.remove('elim');$('#elimBar').classList.remove('on');$('#remBox').classList.remove('on');$('#end').classList.add('hide');$('#menu').classList.remove('hide');showPanel('mMain');}
+function syncAudUI(){$('#rMusic').value=Math.round(AUD.music*100);$('#vMusic').textContent=Math.round(AUD.music*100)+'%';$('#rSfx').value=Math.round(AUD.sfx*100);$('#vSfx').textContent=Math.round(AUD.sfx*100)+'%';$('#cMute').checked=AUD.mute;$('#mute').textContent=AUD.mute?'🔇':'🔊';}
+$('#bStart').onclick=()=>{Snd.resume();$('#menu').classList.add('hide');newGame();};
+$('#bHow').onclick=()=>showPanel('mHow');$('#bLadder').onclick=()=>showPanel('mLadder');$('#bSound').onclick=()=>{showPanel('mSound');syncAudUI();};$('#bAbout').onclick=()=>showPanel('mAbout');
+document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>showPanel('mMain'));
+$('#rMusic').oninput=e=>{AUD.music=e.target.value/100;saveAud();Snd.resume();syncAudUI();};
+$('#rSfx').oninput=e=>{AUD.sfx=e.target.value/100;saveAud();Snd.resume();syncAudUI();};
+$('#rSfx').onchange=()=>Snd.ting(3);
+$('#cMute').onchange=e=>{AUD.mute=e.target.checked;saveAud();Snd.resume();syncAudUI();};
+$('#bTing').onclick=()=>{Snd.resume();[0,2,4].forEach((k,i)=>setTimeout(()=>Snd.ting(k),i*180));};
+$('#mute').onclick=()=>{AUD.mute=!AUD.mute;saveAud();Snd.resume();syncAudUI();};
+$('#menuBtn').onclick=openMenu;
+$('#ladderCard').innerHTML='<h3>סולם הכסף</h3><table>'+Core.LADDER.map((v,i)=>'<tr><td>שאלה '+(i+1)+(i===Core.LADDER.length-1?' ואילך':'')+'</td><td>'+fmt(v)+' על כל טועה</td></tr>').join('')+'<tr><td>כל המאה הודחו</td><td><b>'+fmt(Core.JACKPOT)+'</b></td></tr></table><p class="note">הערכים של שאלות 1, 2, 4, 9 ו-11 מתועדים בוויקיפדיה העברית, השאר מוערכים. אפשר לפרוש עם הקופה בין שאלות, מאחרי שאלה '+Core.CASHOUT_FROM+'.</p>';
+$('#qcount').textContent=(Core.BANK?Core.BANK.length:'')?'מאגר: '+Core.BANK.length+' שאלות מאומתות':'';
+(function(){const k=$('#bkc');for(let i=0;i<46;i++){const d=document.createElement('i');d.className='bk';const sz=6+Math.random()*16;d.style.cssText='left:'+(150+Math.random()*820)+'px;top:'+(40+Math.random()*320)+'px;width:'+sz+'px;height:'+sz+'px;background:rgba('+(120+Math.random()*80|0)+','+(170+Math.random()*60|0)+',255,.7);filter:blur('+(Math.random()*2)+'px);animation-delay:'+(Math.random()*3)+'s;animation-duration:'+(2+Math.random()*3)+'s';k.appendChild(d);}})();
+syncAudUI();if(params.get('panel')){showPanel(params.get('panel'));syncAudUI();}
+buildWall();buildLadder();
+/* ---------- auto-play for tests (?auto=1&seed=N) ---------- */
+function autoStep(){const mode=params.get('mode')||'win';setTimeout(()=>{if(AUTO==='2'&&G.round===2&&!G.used.poll){$('#hPoll').click();setTimeout(()=>$('#a0').click(),300);return setTimeout(()=>{const hot=document.querySelector('.b.hot');if(hot)hot.click();setTimeout(()=>onAnswer(G.q.correct),2500);},900);}if(AUTO==='2'&&G.round===3&&!G.used.ask){$('#hAsk').click();return setTimeout(()=>onAnswer(G.q.correct),2500);}const wrongOn=+params.get('wrongAt')||0;const pick=(wrongOn&&G.round===wrongOn)?(G.q.correct+1)%3:G.q.correct;onAnswer(pick);},1500);}
+function autoNext(){setTimeout(()=>{const b=$('#bot .btn.go');if(b)b.click();},1200);}
+window.__G=()=>G;
+if(AUTO){Snd.resume();$('#menu').classList.add('hide');setTimeout(newGame,200);}
+if(params.get('demo')){$('#menu').classList.add('hide');setTimeout(()=>{newGame();setTimeout(()=>{G.money=params.get('demo')==='won'?1000000:85000;G.eliminated=params.get('demo')==='won'?100:61;endScreen(params.get('demo'),{});},300);},200);}
+</script></body></html>
